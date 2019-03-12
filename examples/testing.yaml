@@ -1,0 +1,12 @@
+athena:
+  read_write_access: False
+
+run_glue_job:
+  iam_role: blah
+
+read_only_s3_access:
+  - test_bucket_read_only/*
+
+read_write_s3_access:
+  - test_bucket_read_write/*
+  - test_bucket_read_only/write_folder/*
