@@ -1,0 +1,173 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CanWriteToDefaultAthenaBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-athena-query-results-*"
+            ]
+        },
+        {
+            "Sid": "CanReadAthenaExamples",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::athena-examples*"
+            ]
+        },
+        {
+            "Sid": "CanReadWriteAthenaDumpFolder",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::alpha-athena-query-dump/${aws:userid}/*"
+            ]
+        },
+        {
+            "Sid": "ReadAthenaGlue",
+            "Effect": "Allow",
+            "Action": [
+                "athena:BatchGetNamedQuery",
+                "athena:BatchGetQueryExecution",
+                "athena:GetNamedQuery",
+                "athena:GetQueryExecution",
+                "athena:GetQueryResults",
+                "athena:GetQueryResultsStream",
+                "athena:GetWorkGroup",
+                "athena:ListNamedQueries",
+                "athena:ListWorkGroups",
+                "athena:StartQueryExecution",
+                "athena:StopQueryExecution",
+                "athena:CancelQueryExecution",
+                "athena:GetCatalogs",
+                "athena:GetExecutionEngine",
+                "athena:GetExecutionEngines",
+                "athena:GetNamespace",
+                "athena:GetNamespaces",
+                "athena:GetTable",
+                "athena:GetTables",
+                "athena:RunQuery",
+                "glue:GetDatabase",
+                "glue:GetDatabases",
+                "glue:GetTable",
+                "glue:GetTables",
+                "glue:GetPartition",
+                "glue:GetPartitions",
+                "glue:BatchGetPartition",
+                "glue:GetCatalogImportStatus",
+                "glue:GetUserDefinedFunction",
+                "glue:GetUserDefinedFunctions"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "GlueJobActions",
+            "Effect": "Allow",
+            "Action": [
+                "glue:BatchStopJobRun",
+                "glue:CreateJob",
+                "glue:DeleteJob",
+                "glue:GetJob",
+                "glue:GetJobs",
+                "glue:GetJobRun",
+                "glue:GetJobRuns",
+                "glue:StartJobRun",
+                "glue:UpdateJob",
+                "glue:ListJobs",
+                "glue:BatchGetJobs"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CanGetLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:GetLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:/aws-glue/*"
+            ]
+        },
+        {
+            "Sid": "CanGetCloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:GetMetricData",
+                "cloudwatch:ListDashboards"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CanReadGlueStuff",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-glue-*/*",
+                "arn:aws:s3:::*/*aws-glue-*/*",
+                "arn:aws:s3:::aws-glue-*"
+            ]
+        },
+        {
+            "Sid": "readonly",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "test_bucket_read_only/*"
+            ]
+        },
+        {
+            "Sid": "readwrite",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion",
+                "s3:DeleteObject",
+                "s3:DeleteObjectVersion",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:RestoreObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "test_bucket_read_write/*",
+                "test_bucket_read_only/write_folder/*"
+            ]
+        },
+        {
+            "Sid": "list",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::test_bucket_read_write",
+                "arn:aws:s3:::test_bucket_read_only"
+            ]
+        }
+    ]
+}
