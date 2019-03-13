@@ -1,5 +1,5 @@
 athena:
-  read_write_access: False
+  read_write_access: false
 
 run_glue_job:
   iam_role: iam_role_name

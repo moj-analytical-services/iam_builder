@@ -8,8 +8,13 @@ def main(config_path, out_path):
     with open('templates/iam_lookup.json') as f:
         iam_lookup = json.load(f)
 
-    with open(config_path, 'r') as ymlfile:
-        config = yaml.load(ymlfile)
+    # Assume config is a yaml file if not json
+    if config_path.endswith('.json'):
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    else:
+        with open(config_path, 'r') as f:
+            config = yaml.load(f)
 
     # Define if has athena permission
     if 'athena' in config:
@@ -95,7 +100,7 @@ def main(config_path, out_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--config", help="path to yaml config")
+    parser.add_argument("-c", "--config", help="path to your yaml/json config")
     parser.add_argument("-o", "--output", help="output_path")
     args = parser.parse_args()
     main(args.config, args.output)
