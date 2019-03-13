@@ -59,7 +59,7 @@ Whilst the example json looks like this:
 }
 ```
 
-- **athena:** only has one key value pair. `read_write_access` which is either true or false. If `false` then only read access to athena. If `True` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
+- **athena:** only has one key value pair. `read_write_access` which is either true or false. If `false` then only read access to athena. If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
 
 - **run_glue_job:** Allows role to run glue jobs. Requires an iam_role parameter which should be the name of the iam role that you are creating.
 
