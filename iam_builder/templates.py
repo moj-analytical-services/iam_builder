@@ -1,4 +1,9 @@
-{
+iam_base_template = {
+    "Version": "2012-10-17",
+    "Statement": []
+}
+
+iam_lookup = {
     "athena_read_access": [
         {
             "Sid": "CanWriteToDefaultAthenaBucket",
@@ -155,21 +160,67 @@
                 "arn:aws:s3:::*/*aws-glue-*/*",
                 "arn:aws:s3:::aws-glue-*"
             ]
-        },
-        {
-            "Sid": "PassRoleToGlueService",
-            "Effect": "Allow",
-            "Action": [
-                "iam:PassRole"
-            ],
-            "Resource": "arn:aws:iam::593291632749:role/<IAM_NAME>",
-            "Condition": {
-                "StringLike": {
-                    "iam:PassedToService": [
-                        "glue.amazonaws.com"
-                    ]
-                }
-            }
         }
     ]
 }
+
+def get_pass_role_to_glue_policy(iam_role):
+    policy = {
+                "Sid": "PassRoleToGlueService",
+                "Effect": "Allow",
+                "Action": [
+                    "iam:PassRole"
+                ],
+                "Resource": f"arn:aws:iam::593291632749:role/{iam_role}",
+                "Condition": {
+                    "StringLike": {
+                        "iam:PassedToService": [
+                            "glue.amazonaws.com"
+                        ]
+                    }
+                }
+            }
+    return policy
+
+def get_read_only_policy(list_of_s3_paths):
+    policy = {
+            "Sid": "readonly",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion",
+            ],
+            "Effect": "Allow",
+            "Resource": list_of_s3_paths,
+        }
+    return policy
+
+    
+def get_read_write_policy(list_of_s3_paths):
+    policy = {
+        "Sid": "readwrite",
+        "Action": [
+            "s3:GetObject",
+            "s3:GetObjectAcl",
+            "s3:GetObjectVersion",
+            "s3:DeleteObject",
+            "s3:DeleteObjectVersion",
+            "s3:PutObject",
+            "s3:PutObjectAcl",
+            "s3:RestoreObject",
+        ],
+        "Effect": "Allow",
+        "Resource": list_of_s3_paths,
+    }
+    return policy
+
+def get_s3_list_bucket_policy(list_of_buckets):
+    policy = {
+        "Sid": "list",
+        "Action": [
+            "s3:ListBucket"
+        ],
+        "Effect": "Allow",
+        "Resource": list(set(list_of_buckets)),
+    }
+    return policy
