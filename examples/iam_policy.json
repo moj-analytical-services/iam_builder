@@ -129,6 +129,36 @@
             ]
         },
         {
+            "Sid": "PassRoleToGlueService",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::593291632749:role/<IAM_NAME>",
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": [
+                        "glue.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "PassRoleToGlueService",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::593291632749:role/iam_role_name",
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": [
+                        "glue.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
             "Sid": "readonly",
             "Action": [
                 "s3:GetObject",

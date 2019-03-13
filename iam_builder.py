@@ -21,7 +21,23 @@ def main(config_path, out_path):
     # Test to run glue jobs
     if 'run_glue_job' in config:
         iam['Statement'].extend(iam_lookup['run_glue_job'])
-
+        # Add ability to pass itself to glue job
+        PassRoleToGlueService = {
+            "Sid": "PassRoleToGlueService",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::593291632749:role/" + config['run_glue_job']['iam_role'],
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": [
+                        "glue.amazonaws.com"
+                    ]
+                }
+            }
+        }
+        iam['Statement'].append(PassRoleToGlueService)
 
     # Deal with read only access
     list_buckets = []
