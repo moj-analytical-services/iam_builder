@@ -10,7 +10,7 @@ setup(
     url='https://github.com/moj-analytical-services/iam_builder',
     author='Karik Isichei',
     author_email='karik.isichei@digital.justice.gov.uk',
-    entry_points = {
+    entry_points={
         'console_scripts': ['iam_builder=iam_builder.command_line:main'],
     }
 )

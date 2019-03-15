@@ -1,7 +1,7 @@
 import json
 import yaml
 
-from templates import (
+from iam_builder.templates import (
     iam_base_template as iam,
     iam_lookup,
     get_pass_role_to_glue_policy,
