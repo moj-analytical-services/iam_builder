@@ -1,28 +1,34 @@
 # IAM Builder
 
-In development.
+In development as no UTs yet.
 
-A python script to generate an IAM policy based on an yaml (done) or json config (not yet done). Not very well structured atm but does the job. Also not unit tested...
+A python script to generate an IAM policy based on an yaml (done) or json config. Not very well structured atm but does the job. Also not unit tested...
+
+To install (currently a private repo):
+
+```
+pip install git+ssh://git@github.com/moj-analytical-services/iam_builder.git@#egg=iam_builder
+```
 
 In python:
 
 ```python
-from iam_builder import main as build_iam
+from iam_builder.iam_builder import build_iam_policy
 
-build_iam("examples/testing.yaml', 'examples/iam_policy.json')
+build_iam_policy("examples/iam_config.yaml', 'examples/iam_policy.json')
 ```
 
 or in bash:
 
 ```
-python iam_builder.py -c examples/testing.yaml -o examples/iam_policy.json
+iam_builder -c examples/iam_config.yaml -o examples/iam_policy.json
 ```
 
 Will output the iam_policy seen in the examples folder.
 
 Your config file can be either a yaml file or json.
 
-The example yaml looks this:
+The example yaml (`iam_config.yaml`) looks this:
 
 ```yaml
 athena:
@@ -39,7 +45,7 @@ read_write_s3_access:
   - test_bucket_read_only/write_folder/*
 ```
 
-Whilst the example json looks like this:
+Whilst the example json (`iam_config.json`) looks like this:
 
 ```json
 {
