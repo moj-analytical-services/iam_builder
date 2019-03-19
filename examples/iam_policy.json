@@ -152,7 +152,22 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "test_bucket_read_only/*"
+                "arn:aws:s3:::test_bucket_read_only/*"
+            ]
+        },
+        {
+            "Sid": "writeonly",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:DeleteObjectVersion",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:RestoreObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::test_bucket_write_only/*",
+                "arn:aws:s3:::test_bucket_read_only/write_only_folder/*"
             ]
         },
         {
@@ -169,8 +184,8 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "test_bucket_read_write/*",
-                "test_bucket_read_only/write_folder/*"
+                "arn:aws:s3:::test_bucket_read_write/*",
+                "arn:aws:s3:::test_bucket_read_only/write_folder/*"
             ]
         },
         {
@@ -180,8 +195,8 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::test_bucket_read_write",
-                "arn:aws:s3:::test_bucket_read_only"
+                "arn:aws:s3:::arn:aws:s3:::test_bucket_read_write",
+                "arn:aws:s3:::arn:aws:s3:::test_bucket_read_only"
             ]
         }
     ]
