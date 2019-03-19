@@ -6,6 +6,7 @@ from iam_builder.templates import (
     iam_lookup,
     get_pass_role_to_glue_policy,
     get_read_only_policy,
+    get_write_only_policy,
     get_read_write_policy,
     get_s3_list_bucket_policy
 )
@@ -38,6 +39,13 @@ def build_iam_policy(config_path, out_path):
     if 'read_only_s3_access' in config:
         s3_read_only = get_read_only_policy(config['read_only_s3_access'])
         iam['Statement'].append(s3_read_only)
+
+        # Get buckets to list
+        list_buckets.extend(['arn:aws:s3:::' + p.split('/')[0] for p in config['read_only_s3_access']])
+
+    if 'write_only_s3_access' in config:
+        s3_write_only = get_write_only_policy(config['write_only_s3_access'])
+        iam['Statement'].append(s3_write_only)
 
         # Get buckets to list
         list_buckets.extend(['arn:aws:s3:::' + p.split('/')[0] for p in config['read_only_s3_access']])

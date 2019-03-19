@@ -183,6 +183,7 @@ def get_pass_role_to_glue_policy(iam_role):
     return policy
 
 def get_read_only_policy(list_of_s3_paths):
+    list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
             "Sid": "readonly",
             "Action": [
@@ -195,8 +196,24 @@ def get_read_only_policy(list_of_s3_paths):
         }
     return policy
 
-    
+def get_write_only_policy(list_of_s3_paths):
+    list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
+    policy = {
+            "Sid": "writeonly",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:DeleteObjectVersion",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:RestoreObject"
+            ],
+            "Effect": "Allow",
+            "Resource": list_of_s3_paths,
+        }
+    return policy
+
 def get_read_write_policy(list_of_s3_paths):
+    list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
         "Sid": "readwrite",
         "Action": [
@@ -215,6 +232,7 @@ def get_read_write_policy(list_of_s3_paths):
     return policy
 
 def get_s3_list_bucket_policy(list_of_buckets):
+    list_of_buckets = add_s3_arn_prefix(list_of_buckets)
     policy = {
         "Sid": "list",
         "Action": [
@@ -224,3 +242,7 @@ def get_s3_list_bucket_policy(list_of_buckets):
         "Resource": list(set(list_of_buckets)),
     }
     return policy
+
+def add_s3_arn_prefix(paths):
+    arn_prefix = 'arn:aws:s3:::'
+    return [arn_prefix + p for p in paths]
