@@ -195,8 +195,9 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::arn:aws:s3:::test_bucket_read_write",
-                "arn:aws:s3:::arn:aws:s3:::test_bucket_read_only"
+                "arn:aws:s3:::test_bucket_read_only",
+                "arn:aws:s3:::test_bucket_write_only",
+                "arn:aws:s3:::test_bucket_read_write"
             ]
         }
     ]
