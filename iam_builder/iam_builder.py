@@ -57,7 +57,7 @@ def build_iam_policy(config_path, out_path):
             iam['Statement'].append(s3_read_write)
 
             # Get buckets to list
-            list_buckets.extend([p.split('/')[0] for p in config['read_write']])
+            list_buckets.extend([p.split('/')[0] for p in config['s3']['read_write']])
 
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
