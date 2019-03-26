@@ -1,6 +1,3 @@
-import json
-import yaml
-
 from iam_builder.templates import (
     iam_base_template as iam,
     iam_lookup,
@@ -11,14 +8,10 @@ from iam_builder.templates import (
     get_s3_list_bucket_policy
 )
 
-def build_iam_policy(config_path, out_path):
-    # Assume config is a yaml file if not json
-    if config_path.endswith('.json'):
-        with open(config_path, 'r') as f:
-            config = json.load(f)
-    else:
-        with open(config_path, 'r') as f:
-            config = yaml.load(f)
+def build_iam_policy(config):
+    """
+    Takes a configuration for an IAM policy and returns the policy as a dict.
+    """
 
     # Define if has athena permission
     if 'athena' in config:
@@ -63,5 +56,4 @@ def build_iam_policy(config_path, out_path):
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
         iam['Statement'].append(s3_list_bucket)
 
-    with open(out_path, "w+") as outfile:
-        json.dump(iam, outfile, indent=4, separators=(',', ': '))
+    return iam
