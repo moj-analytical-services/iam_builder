@@ -38,26 +38,26 @@ def build_iam_policy(config_path, out_path):
     list_buckets = []
     if 's3' in config:
         if 'read_only' in config['s3']:
-            s3_read_only = get_read_only_policy(config['read_only_s3_access'])
+            s3_read_only = get_read_only_policy(config['s3']['read_only'])
             iam['Statement'].append(s3_read_only)
 
             # Get buckets to list
-            list_buckets.extend([p.split('/')[0] for p in config['read_only_s3_access']])
+            list_buckets.extend([p.split('/')[0] for p in config['s3']['read_only']])
 
         if 'write_only' in config['s3']:
-            s3_write_only = get_write_only_policy(config['write_only_s3_access'])
+            s3_write_only = get_write_only_policy(config['s3']['write_only'])
             iam['Statement'].append(s3_write_only)
 
             # Get buckets to list
-            list_buckets.extend([p.split('/')[0] for p in config['write_only_s3_access']])
+            list_buckets.extend([p.split('/')[0] for p in config['s3']['write_only']])
 
         # Deal with write only access
         if 'read_write' in config['s3']:
-            s3_read_write = get_read_write_policy(config['read_write_s3_access'])
+            s3_read_write = get_read_write_policy(config['s3']['read_write'])
             iam['Statement'].append(s3_read_write)
 
             # Get buckets to list
-            list_buckets.extend([p.split('/')[0] for p in config['read_write_s3_access']])
+            list_buckets.extend([p.split('/')[0] for p in config['read_write']])
 
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
