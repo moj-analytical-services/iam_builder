@@ -14,11 +14,10 @@ def main():
     output_path = args.output
 
     # Assume config is a yaml file if not json
-    if config_path.endswith('.json'):
-        with open(config_path, 'r') as f:
+    with open(config_path, 'r') as f:
+        if config_path.endswith('.json'):
             config = json.load(f)
-    else:
-        with open(config_path, 'r') as f:
+        else:
             config = yaml.load(f)
     
     iam = build_iam_policy(config)
