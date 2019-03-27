@@ -1,5 +1,5 @@
 athena:
-  write: false
+  write: true
 
 glue_job:
   iam_role_name: iam_role_name
@@ -15,4 +15,3 @@ s3:
   read_write:
     - test_bucket_read_write/*
     - test_bucket_read_only/write_folder/*
-    

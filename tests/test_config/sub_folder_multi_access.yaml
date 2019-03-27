@@ -1,0 +1,7 @@
+s3:
+  read_write:
+    - alpha-test-iam-builer/read_write/*
+  read_only:
+    - alpha-test-iam-builer/read_only/*
+  write_only:
+    - alpha-test-iam-builer/write_only/*

@@ -1,0 +1,6 @@
+athena:
+  write: false
+
+s3:
+  read_only:
+    - alpha-test-iam-builer/db/*

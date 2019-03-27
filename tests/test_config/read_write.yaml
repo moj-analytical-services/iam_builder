@@ -1,0 +1,3 @@
+s3:
+  read_write:
+    - alpha-test-iam-builer/read_write/*
