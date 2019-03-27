@@ -1,5 +1,7 @@
+import copy
+
 from iam_builder.templates import (
-    iam_base_template as iam,
+    iam_base_template,
     iam_lookup,
     get_pass_role_to_glue_policy,
     get_read_only_policy,
@@ -12,7 +14,8 @@ def build_iam_policy(config):
     """
     Takes a configuration for an IAM policy and returns the policy as a dict.
     """
-
+    iam = copy.deepcopy(iam_base_template)
+    
     # Define if has athena permission
     if 'athena' in config:
         iam['Statement'].extend(iam_lookup["athena_read_access"])
