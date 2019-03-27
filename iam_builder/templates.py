@@ -106,7 +106,7 @@ iam_lookup = {
             ]
         }
     ],
-    "run_glue_job": [
+    "glue_job": [
         {
             "Sid": "GlueJobActions",
             "Effect": "Allow",
@@ -121,7 +121,8 @@ iam_lookup = {
                 "glue:StartJobRun",
                 "glue:UpdateJob",
                 "glue:ListJobs",
-                "glue:BatchGetJobs"
+                "glue:BatchGetJobs",
+                "glue:GetJobBookmark"
             ],
             "Resource": [
                 "*"
