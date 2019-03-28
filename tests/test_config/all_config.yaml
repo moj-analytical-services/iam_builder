@@ -1,0 +1,17 @@
+athena:
+  write: true
+
+glue_job:
+  iam_role_name: iam_role_name
+
+s3: 
+  read_only:
+    - test_bucket_read_only/*
+
+  write_only:
+    - test_bucket_write_only/*
+    - test_bucket_read_only/write_only_folder/*
+
+  read_write:
+    - test_bucket_read_write/*
+    - test_bucket_read_only/write_folder/*

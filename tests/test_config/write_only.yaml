@@ -1,0 +1,3 @@
+s3:
+  write_only:
+    - alpha-test-iam-builer/write_only/*

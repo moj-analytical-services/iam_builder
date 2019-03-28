@@ -1,0 +1,3 @@
+s3:
+  read_only:
+    - alpha-test-iam-builer/read_only/*

@@ -1,0 +1,2 @@
+glue_job:
+  role: should_fail_bad_key
