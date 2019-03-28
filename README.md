@@ -5,7 +5,7 @@ A python script to generate an IAM policy based on an yaml or json configuration
 To install:
 
 ```
-pip install git+git://github.com/moj-analytical-services/etl_manager.git#egg=etl_manager
+pip install git+git://github.com/moj-analytical-services/iam_builder.git#egg=iam_builder
 ```
 
 To use the command line interface:
