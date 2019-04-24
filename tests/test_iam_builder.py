@@ -1,5 +1,5 @@
 """
-Testing DatabaseMeta, TableMeta
+Testing iam builder inputs against expected outputs
 """
 
 import unittest

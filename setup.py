@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='iam_builder',
-    version='1.0.0',
+    version='1.1.0',
     packages=find_packages(exclude=['tests*']),
     license='MIT',
     description='A lil python package to generate iam policies',
