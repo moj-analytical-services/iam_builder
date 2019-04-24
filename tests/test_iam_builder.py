@@ -1,5 +1,5 @@
 """
-Testing DatabaseMeta, TableMeta
+Testing iam builder inputs against expected outputs
 """
 
 import unittest
@@ -58,4 +58,5 @@ class TestBadConfigs(unittest.TestCase):
         'bad_glue_config'
     ])
     def test_config_error(self, config_name):
+        self.maxDiff = None
         assert_config_error(self, config_name)

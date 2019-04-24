@@ -18,7 +18,8 @@
         {
             "Sid": "list",
             "Action": [
-                "s3:ListBucket"
+                "s3:ListBucket",
+                "s3:ListAllMyBuckets"
             ],
             "Effect": "Allow",
             "Resource": [

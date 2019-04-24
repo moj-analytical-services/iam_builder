@@ -217,12 +217,13 @@
         {
             "Sid": "list",
             "Action": [
-                "s3:ListBucket"
+                "s3:ListBucket",
+                "s3:ListAllMyBuckets"
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::test_bucket_read_only",
                 "arn:aws:s3:::test_bucket_read_write",
+                "arn:aws:s3:::test_bucket_read_only",
                 "arn:aws:s3:::test_bucket_write_only"
             ]
         }
