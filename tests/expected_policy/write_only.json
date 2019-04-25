@@ -19,7 +19,8 @@
             "Sid": "list",
             "Action": [
                 "s3:ListBucket",
-                "s3:ListAllMyBuckets"
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
             ],
             "Effect": "Allow",
             "Resource": [

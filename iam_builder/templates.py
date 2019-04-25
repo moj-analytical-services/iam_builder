@@ -238,7 +238,8 @@ def get_s3_list_bucket_policy(list_of_buckets):
         "Sid": "list",
         "Action": [
             "s3:ListBucket",
-            "s3:ListAllMyBuckets"
+            "s3:ListAllMyBuckets",
+            "s3:GetBucketLocation"
         ],
         "Effect": "Allow",
         "Resource": sorted(list(set(list_of_buckets))),
