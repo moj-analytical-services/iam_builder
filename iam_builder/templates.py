@@ -172,7 +172,7 @@ def get_pass_role_to_glue_policy(iam_role):
                 "Action": [
                     "iam:PassRole"
                 ],
-                "Resource": f"arn:aws:iam::593291632749:role/{iam_role}",
+                "Resource": "arn:aws:iam::593291632749:role/{}".format(iam_role),
                 "Condition": {
                     "StringLike": {
                         "iam:PassedToService": [
