@@ -18,7 +18,7 @@ def main():
         if config_path.endswith('.json'):
             config = json.load(f)
         else:
-            config = yaml.load(f)
+            config = yaml.load(f, Loader=yaml.FullLoader)
     
     iam = build_iam_policy(config)
 
