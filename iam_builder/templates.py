@@ -3,6 +3,8 @@ iam_base_template = {
     "Statement": []
 }
 
+athena_dump_bucket = "alpha-athena-query-dump"
+
 iam_lookup = {
     "athena_read_access": [
         {
@@ -36,7 +38,7 @@ iam_lookup = {
                 "s3:DeleteObject"
             ],
             "Resource": [
-                "arn:aws:s3:::alpha-athena-query-dump/${aws:userid}/*"
+                "arn:aws:s3:::" + athena_dump_bucket + "/${aws:userid}/*"
             ]
         },
         {
