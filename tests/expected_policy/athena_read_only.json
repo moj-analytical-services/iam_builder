@@ -95,6 +95,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
+                "arn:aws:s3:::alpha-athena-query-dump",
                 "arn:aws:s3:::alpha-test-iam-builer"
             ]
         }

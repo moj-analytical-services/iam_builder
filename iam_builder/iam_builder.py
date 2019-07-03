@@ -7,7 +7,8 @@ from iam_builder.templates import (
     get_read_only_policy,
     get_write_only_policy,
     get_read_write_policy,
-    get_s3_list_bucket_policy
+    get_s3_list_bucket_policy,
+    athena_dump_bucket
 )
 
 def build_iam_policy(config):
@@ -16,13 +17,17 @@ def build_iam_policy(config):
     """
     iam = copy.deepcopy(iam_base_template)
     
+    list_buckets = []
     # Define if has athena permission
     if 'athena' in config:
         iam['Statement'].extend(iam_lookup["athena_read_access"])
 
         if config['athena']['write']:
             iam['Statement'].extend(iam_lookup["athena_write_access"])
-
+        
+        # Needed for s3tools package
+        list_buckets.append(athena_dump_bucket)
+        
     # Test to run glue jobs
     if 'glue_job' in config:
         iam['Statement'].extend(iam_lookup['glue_job'])
@@ -31,7 +36,6 @@ def build_iam_policy(config):
         iam['Statement'].append(pass_role)
 
     # Deal with read only access
-    list_buckets = []
     if 's3' in config:
         if 'read_only' in config['s3']:
             s3_read_only = get_read_only_policy(config['s3']['read_only'])
@@ -54,7 +58,7 @@ def build_iam_policy(config):
 
             # Get buckets to list
             list_buckets.extend([p.split('/')[0] for p in config['s3']['read_write']])
-
+    
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
         iam['Statement'].append(s3_list_bucket)

@@ -16,7 +16,7 @@ test_policy_base_path = 'tests/expected_policy'
 
 def assert_config_as_expected(ut, config_name):
     with open(os.path.join(config_base_path, config_name + '.yaml')) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
     with open(os.path.join(test_policy_base_path, config_name + '.json')) as f:
         expected = json.load(f)
 
@@ -25,7 +25,7 @@ def assert_config_as_expected(ut, config_name):
 
 def assert_config_error(ut, config_name):
     with open(os.path.join(config_base_path, config_name + '.yaml')) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
     with ut.assertRaises(KeyError):
         build_iam_policy(config)
 
