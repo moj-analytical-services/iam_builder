@@ -19,6 +19,7 @@ def main():
             config = json.load(f)
         else:
             config = yaml.load(f, Loader=yaml.FullLoader)
+
     iam = build_iam_policy(config)
 
     with open(output_path, "w+") as outfile:
