@@ -192,13 +192,40 @@
         {
             "Sid": "list",
             "Action": [
-                "s3:ListBucket"
+                "s3:ListBucket",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::test_bucket_write_only",
+                "arn:aws:s3:::alpha-athena-query-dump",
+                "arn:aws:s3:::test_bucket_read_only",
                 "arn:aws:s3:::test_bucket_read_write",
-                "arn:aws:s3:::test_bucket_read_only"
+                "arn:aws:s3:::test_bucket_write_only"
+            ]
+        },
+        {
+            "Sid": "readParams",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParameterHistory",
+                "ssm:GetParametersByPath"
+            ],
+            "Resource": [
+                "arn:aws:ssm:*:*:parameter/alpha/airflow/secrets_role_name/*"
+            ]
+        },
+        {
+            "Sid": "allowDecrypt",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "arn:aws:kms:::key/*"
             ]
         }
     ]
