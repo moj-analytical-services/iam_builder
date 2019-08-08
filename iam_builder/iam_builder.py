@@ -8,8 +8,10 @@ from iam_builder.templates import (
     get_write_only_policy,
     get_read_write_policy,
     get_s3_list_bucket_policy,
+    get_role_secrets,
     athena_dump_bucket
 )
+
 
 def build_iam_policy(config):
     """
@@ -37,6 +39,7 @@ def build_iam_policy(config):
 
     # Deal with read only access
     if 's3' in config:
+        print('getting s3')
         if 'read_only' in config['s3']:
             s3_read_only = get_read_only_policy(config['s3']['read_only'])
             iam['Statement'].append(s3_read_only)
@@ -62,5 +65,12 @@ def build_iam_policy(config):
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
         iam['Statement'].append(s3_list_bucket)
+    
+    # get secrets for access to things
+    if 'secrets' in config:
+        print('accessing secrets')
+        secrets = get_role_secrets(config['secrets']['role_for_secrets'])
+        iam['Statement'].append(secrets)
+        iam['Statement'].extend(iam_lookup['key_decrypt'])
 
     return iam

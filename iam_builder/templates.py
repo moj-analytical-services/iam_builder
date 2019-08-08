@@ -164,6 +164,18 @@ iam_lookup = {
                 "arn:aws:s3:::aws-glue-*"
             ]
         }
+    ],
+    "key_decrypt": [
+        {
+            "Sid": "allowDecrypt",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "arn:aws:kms:::key/*"
+            ]
+        }
     ]
 }
 
@@ -246,6 +258,28 @@ def get_s3_list_bucket_policy(list_of_buckets):
         "Effect": "Allow",
         "Resource": sorted(list(set(list_of_buckets))),
     }
+    return policy
+
+def get_role_secrets(role):
+    if len(role)>1:
+        print("only one role permitted")
+        policy = {}
+    else:
+        secrets_path = f"arn:aws:ssm:*:*:parameter/alpha/airflow/{''.join(role)}/*"
+        policy = {
+            "Sid": "readParams",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParameterHistory",
+                "ssm:GetParametersByPath"
+                ],
+            "Resource": [
+                secrets_path
+                ]
+            }
     return policy
 
 def add_s3_arn_prefix(paths):

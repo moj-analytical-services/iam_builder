@@ -5,6 +5,7 @@ import json
 from iam_builder.iam_builder import build_iam_policy
 
 def main():
+    print('running main')
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="path to your yaml/json config")
     parser.add_argument("-o", "--output", help="output_path")
@@ -19,7 +20,7 @@ def main():
             config = json.load(f)
         else:
             config = yaml.load(f, Loader=yaml.FullLoader)
-    
+    print('building policy')
     iam = build_iam_policy(config)
 
     with open(output_path, "w+") as outfile:
