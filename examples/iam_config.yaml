@@ -15,3 +15,7 @@ s3:
   read_write:
     - test_bucket_read_write/*
     - test_bucket_read_only/write_folder/*
+
+secrets:
+  secrets_role_name: secrets_role_name
+    

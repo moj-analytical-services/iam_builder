@@ -67,7 +67,7 @@ def build_iam_policy(config):
     
     # get secrets for access to things
     if 'secrets' in config:
-        secrets = get_role_secrets(config['secrets']['role_for_secrets'])
+        secrets = get_role_secrets(config['secrets']['secrets_role_name'])
         iam['Statement'].append(secrets)
         iam['Statement'].extend(iam_lookup['key_decrypt'])
 
