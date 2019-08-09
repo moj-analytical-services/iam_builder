@@ -8,6 +8,7 @@ from iam_builder.templates import (
     get_write_only_policy,
     get_read_write_policy,
     get_s3_list_bucket_policy,
+    get_secrets,
     athena_dump_bucket
 )
 
