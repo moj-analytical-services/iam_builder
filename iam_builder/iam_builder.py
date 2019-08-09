@@ -8,6 +8,7 @@ from iam_builder.templates import (
     get_write_only_policy,
     get_read_write_policy,
     get_s3_list_bucket_policy,
+    get_secrets,
     athena_dump_bucket
 )
 
@@ -29,10 +30,10 @@ def build_iam_policy(config):
         list_buckets.append(athena_dump_bucket)
         
     # Test to run glue jobs
-    if 'glue_job' in config:
+    if 'glue_job' in config and config['glue_job']:
         iam['Statement'].extend(iam_lookup['glue_job'])
         # Add ability to pass itself to glue job
-        pass_role = get_pass_role_to_glue_policy(config['glue_job']['iam_role_name'])
+        pass_role = get_pass_role_to_glue_policy(config['iam_role_name'])
         iam['Statement'].append(pass_role)
 
     # Deal with read only access
@@ -62,5 +63,10 @@ def build_iam_policy(config):
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
         iam['Statement'].append(s3_list_bucket)
+    
+    if 'secrets' in config and config['secrets']:
+        secrets_statement = get_secrets(config['iam_role_name'])
+        iam['Statement'].append(secrets_statement)
+        iam['Statement'].extend(iam_lookup['decrypt_statement'])
 
     return iam

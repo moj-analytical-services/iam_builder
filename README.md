@@ -44,13 +44,16 @@ Your config file can be either a yaml or json file.
 The example yaml (`iam_config.yaml`) looks this:
 
 ```yaml
+iam_role_name: iam_role_name
+
 athena:
   write: false
 
-glue_job:
-  iam_role_name: iam_role_name
+glue_job: true
 
-s3:
+secrets: true
+
+s3: 
   read_only:
     - test_bucket_read_only/*
 
@@ -67,12 +70,12 @@ Whilst the example json (`iam_config.json`) looks like this:
 
 ```json
 {
+  "iam_role_name": "iam_role_name",
   "athena": {
     "write": false
   },
-  "glue_job": {
-    "iam_role_name": "iam_role_name"
-  },
+  "glue_job": true,
+  "secrets": true,
   "s3": {
     "read_only": [
       "test_bucket_read_only/*"
@@ -88,12 +91,15 @@ Whilst the example json (`iam_config.json`) looks like this:
   }
 }
 ```
+- **iam_role_name:** The role name of your airflow job; required if you want to run glue jobs or access secrets.
 
-- **athena:** only has one key value pair. `write` which is either true or false. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
+- **athena:** Only has one key value pair. `write` which is either true or false. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
 
-- **run_glue_job:** Allows role to run glue jobs. Requires an `iam_role_name` parameter which should be the name of the iam role that is going to use this policy.
+- **glue_job:** Boolean; must be set to `true` to allow role to run glue jobs. If `false` or absent role will not be able to run glue jobs.
 
-- **s3:** Has can have up to 3 keys: `read_only`, `write_only` and `read_write`. Each key describes the level of access you want your iam policy to have with each s3 path. More details below:
+- **secrets:** Boolean; must be set to `true` to allow role to access secrets from AWS Parameter Store. If `false` or absent role will not be able to access secrets.
+
+- **s3:** Can have up to 3 keys: `read_only`, `write_only` and `read_write`. Each key describes the level of access you want your iam policy to have with each s3 path. More details below:
   
   - **read_only:** A list of s3 paths that the iam_role should be able to access (read only). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
