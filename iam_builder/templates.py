@@ -263,3 +263,20 @@ def get_s3_list_bucket_policy(list_of_buckets):
 def add_s3_arn_prefix(paths):
     arn_prefix = 'arn:aws:s3:::'
     return [arn_prefix + p for p in paths]
+
+def get_secrets(iam_role):
+    statement = {
+        "Sid": "readParams",
+        "Effect": "Allow",
+        "Action": [
+            "ssm:DescribeParameters",
+            "ssm:GetParameter",
+            "ssm:GetParameters",
+            "ssm:GetParameterHistory",
+            "ssm:GetParametersByPath"
+        ],
+        "Resource": [
+            f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
+        ]
+    }
+    return statement
