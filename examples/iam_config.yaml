@@ -3,7 +3,9 @@ iam_role_name: iam_role_name
 athena:
   write: false
 
-glue_job: false
+glue_job: true
+
+secrets: true
 
 s3: 
   read_only:
