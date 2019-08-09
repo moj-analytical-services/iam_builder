@@ -164,6 +164,18 @@ iam_lookup = {
                 "arn:aws:s3:::aws-glue-*"
             ]
         }
+    ],
+    "decrypt_statement": [
+        {
+            "Sid": "allowDecrypt",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "arn:aws:kms:::key/*"
+            ]
+        }
     ]
 }
 

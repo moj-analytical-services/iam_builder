@@ -29,10 +29,10 @@ def build_iam_policy(config):
         list_buckets.append(athena_dump_bucket)
         
     # Test to run glue jobs
-    if 'glue_job' in config:
+    if 'glue_job' in config and config['glue_job']:
         iam['Statement'].extend(iam_lookup['glue_job'])
         # Add ability to pass itself to glue job
-        pass_role = get_pass_role_to_glue_policy(config['glue_job']['iam_role_name'])
+        pass_role = get_pass_role_to_glue_policy(config['iam_role_name'])
         iam['Statement'].append(pass_role)
 
     # Deal with read only access
