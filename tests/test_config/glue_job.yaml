@@ -1,6 +1,6 @@
-glue_job:
-  iam_role_name: an_iam_role_name
+iam_role_name: an_iam_role_name
 
+glue_job: true
 s3:
   read_write:
     - alpha-test-iam-builer/*

@@ -30,7 +30,26 @@ def assert_config_error(ut, config_name):
         build_iam_policy(config)
 
 
+class TestExampleConfigs(unittest.TestCase):
+    "Test examples in package"
 
+    def test_examples(self):
+        with open('examples/iam_config.yaml') as f:
+            config_y = yaml.load(f, Loader=yaml.FullLoader)
+
+        with open('examples/iam_config.json') as f:
+            config_j = json.load(f)
+
+        with open('examples/iam_policy.json') as f:
+            expected = json.load(f)
+    
+        out_y = build_iam_policy(config_y)
+        out_j = build_iam_policy(config_j)
+    
+        self.assertDictEqual(config_j, config_y)
+        self.assertDictEqual(out_y, expected)
+        self.assertDictEqual(out_j, expected)
+    
 class TestConfigOutputs(unittest.TestCase):
     """
     Test different configs
