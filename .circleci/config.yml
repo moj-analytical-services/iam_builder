@@ -6,12 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: setup env and run tests
+          name: setup env
           command: |  # use pipenv to install dependencies
             pip install "poetry>=0.12"
             poetry install
-            which python
-            source "$(poetry venv)"
-            which python
-            python -m unittest discover
-            
+      - run:
+          name: run tests
+          command: |
+            poetry run python -m unittest discover -v
