@@ -1,5 +1,7 @@
 # IAM Builder
 
+[![CircleCI](https://circleci.com/gh/moj-analytical-services/iam_builder.svg?style=svg)](https://circleci.com/gh/moj-analytical-services/iam_builder)
+
 A python script to generate an IAM policy based on an yaml or json configuration.
 
 To install:
