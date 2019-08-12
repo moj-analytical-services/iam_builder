@@ -1,2 +1,3 @@
-glue_job:
-  role: should_fail_bad_key
+glue_job: True
+
+iam_role: should_fail_bad_key
