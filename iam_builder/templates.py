@@ -8,6 +8,17 @@ athena_dump_bucket = "alpha-athena-query-dump"
 iam_lookup = {
     "athena_read_access": [
         {
+            "Sid": "CanListObjectsInAthenaBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::" + athena_dump_bucket
+            ]
+        },
+        {
             "Sid": "CanWriteToDefaultAthenaBucket",
             "Effect": "Allow",
             "Action": [

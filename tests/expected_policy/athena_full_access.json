@@ -2,6 +2,17 @@
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "CanListObjectsInAthenaBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::alpha-athena-query-dump"
+            ]
+        },
+        {
             "Sid": "CanWriteToDefaultAthenaBucket",
             "Effect": "Allow",
             "Action": [

@@ -29,7 +29,7 @@ import json
 from iam_builder.iam_builder import build_iam_policy
 
 with open('examples/iam_config.yaml') as f:
-  config = yaml.load(f)
+  config = yaml.load(f, Loader=yaml.FullLoader)
 
 iam_policy = build_iam_policy(config)
 
