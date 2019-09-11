@@ -1,5 +1,7 @@
 # IAM Builder
 
+[![Actions Status](https://github.com/moj-analytical-services/iam_builder/workflows/IAM%20Builder/badge.svg)](https://github.com/moj-analytical-services/iam_builder/actions)
+
 A python script to generate an IAM policy based on an yaml or json configuration.
 
 To install:
