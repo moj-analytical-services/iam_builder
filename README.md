@@ -1,6 +1,6 @@
 # IAM Builder
 
-[![CircleCI](https://circleci.com/gh/moj-analytical-services/iam_builder.svg?style=svg)](https://circleci.com/gh/moj-analytical-services/iam_builder)
+[![Actions Status](https://github.com/moj-analytical-services/iam_builder/workflows/IAM%20Builder/badge.svg)](https://github.com/moj-analytical-services/iam_builder/actions)
 
 A python script to generate an IAM policy based on an yaml or json configuration.
 
@@ -31,7 +31,7 @@ import json
 from iam_builder.iam_builder import build_iam_policy
 
 with open('examples/iam_config.yaml') as f:
-  config = yaml.load(f)
+  config = yaml.load(f, Loader=yaml.FullLoader)
 
 iam_policy = build_iam_policy(config)
 
