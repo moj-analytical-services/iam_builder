@@ -8,13 +8,14 @@ athena_dump_bucket = "alpha-athena-query-dump"
 iam_lookup = {
     "athena_read_access": [
         {
-            "Sid": "CanListObjectsInAthenaQueryResults",
+            "Sid": "CanListObjectsInAthenaBuckets",
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::aws-athena-query-results-*"
+                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::" + athena_dump_bucket
             ]
         },
         {
@@ -258,28 +259,17 @@ def get_read_write_policy(list_of_s3_paths):
 
 def get_s3_list_bucket_policy(list_of_buckets):
     list_of_buckets = add_s3_arn_prefix(list_of_buckets)
-    bucket_resources = sorted(list(set(list_of_buckets)))
-    object_resources = [b + "/*" for b in sorted(list(set(list_of_buckets)))]
-    policies = [
-        {
-            "Sid": "ListBuckets",
-            "Action": [
-                "s3:ListAllMyBuckets",
-                "s3:GetBucketLocation"
-            ],
-            "Effect": "Allow",
-            "Resource": bucket_resources,
-        },
-        {
-            "Sid": "ListBucketObjects",
-            "Action": [
-                "s3:ListBucket"
-            ],
-            "Effect": "Allow",
-            "Resource": object_resources,
-        }
-    ]
-    return policies
+    policy = {
+        "Sid": "list",
+        "Action": [
+            "s3:ListBucket",
+            "s3:ListAllMyBuckets",
+            "s3:GetBucketLocation"
+        ],
+        "Effect": "Allow",
+        "Resource": sorted(list(set(list_of_buckets))),
+    }
+    return policy
 
 def add_s3_arn_prefix(paths):
     arn_prefix = 'arn:aws:s3:::'

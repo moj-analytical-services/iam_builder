@@ -14,24 +14,15 @@
             ]
         },
         {
-            "Sid": "ListBuckets",
+            "Sid": "list",
             "Action": [
+                "s3:ListBucket",
                 "s3:ListAllMyBuckets",
                 "s3:GetBucketLocation"
             ],
             "Effect": "Allow",
             "Resource": [
                 "arn:aws:s3:::alpha-test-iam-builer"
-            ]
-        },
-        {
-            "Sid": "ListBucketObjects",
-            "Action": [
-                "s3:ListBucket"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:s3:::alpha-test-iam-builer/*"
             ]
         }
     ]
