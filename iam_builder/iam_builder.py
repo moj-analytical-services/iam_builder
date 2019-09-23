@@ -62,8 +62,8 @@ def build_iam_policy(config):
     
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
-        iam['Statement'].extend(s3_list_bucket)
-
+        iam['Statement'].append(s3_list_bucket)
+    
     if 'secrets' in config and config['secrets']:
         secrets_statement = get_secrets(config['iam_role_name'])
         iam['Statement'].append(secrets_statement)

@@ -2,13 +2,14 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "CanListObjectsInAthenaQueryResults",
+            "Sid": "CanListObjectsInAthenaBuckets",
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::aws-athena-query-results-*"
+                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::alpha-athena-query-dump"
             ]
         },
         {
@@ -122,8 +123,9 @@
             ]
         },
         {
-            "Sid": "ListBuckets",
+            "Sid": "list",
             "Action": [
+                "s3:ListBucket",
                 "s3:ListAllMyBuckets",
                 "s3:GetBucketLocation"
             ],
@@ -131,17 +133,6 @@
             "Resource": [
                 "arn:aws:s3:::alpha-athena-query-dump",
                 "arn:aws:s3:::alpha-test-iam-builer"
-            ]
-        },
-        {
-            "Sid": "ListBucketObjects",
-            "Action": [
-                "s3:ListBucket"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:s3:::alpha-athena-query-dump/*",
-                "arn:aws:s3:::alpha-test-iam-builer/*"
             ]
         }
     ]
