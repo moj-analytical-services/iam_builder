@@ -26,7 +26,11 @@
             "Sid": "CanGetLogs",
             "Effect": "Allow",
             "Action": [
-                "logs:GetLogEvents"
+                "logs:GetLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
             ],
             "Resource": [
                 "arn:aws:logs:*:*:/aws-glue/*"
@@ -36,6 +40,7 @@
             "Sid": "CanGetCloudWatchLogs",
             "Effect": "Allow",
             "Action": [
+                "cloudwatch:PutMetricData",
                 "cloudwatch:GetMetricData",
                 "cloudwatch:ListDashboards"
             ],
