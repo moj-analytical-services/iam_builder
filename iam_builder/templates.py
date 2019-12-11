@@ -145,7 +145,11 @@ iam_lookup = {
             "Sid": "CanGetLogs",
             "Effect": "Allow",
             "Action": [
-                "logs:GetLogEvents"
+                "logs:GetLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
             ],
             "Resource": [
                 "arn:aws:logs:*:*:/aws-glue/*"
@@ -155,6 +159,7 @@ iam_lookup = {
             "Sid": "CanGetCloudWatchLogs",
             "Effect": "Allow",
             "Action": [
+                "cloudwatch:PutMetricData",
                 "cloudwatch:GetMetricData",
                 "cloudwatch:ListDashboards"
             ],
