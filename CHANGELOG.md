@@ -6,9 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## v3.4.0
+## v3.5.0
 
 - Added additional permissions to glue jobs to write logs and metrics correctly
+- Updated project toml
+
+## v3.4.0
+- Depreciated as project toml was not updated
 
 ## v3.3.0
 
