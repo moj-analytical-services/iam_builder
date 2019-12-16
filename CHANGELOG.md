@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## v3.4.0
+
+- Added additional permissions to glue jobs to write logs and metrics correctly
+
 ## v3.3.0
 
 - Reverting version back to v3.1.0 and releasing as a new version
