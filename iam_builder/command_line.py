@@ -3,7 +3,7 @@ import yaml
 import json
 
 from iam_builder.iam_builder import build_iam_policy
-VERSION = "3.3.0"
+VERSION = "3.5.0"
 
 def main():
     parser = argparse.ArgumentParser()
