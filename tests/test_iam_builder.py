@@ -6,10 +6,12 @@ import unittest
 import os
 import yaml
 import json
+import toml
 
 from parameterized import parameterized
 
 from iam_builder.iam_builder import build_iam_policy
+from iam_builder.command_line import VERSION
 
 config_base_path = 'tests/test_config'
 test_policy_base_path = 'tests/expected_policy'
@@ -28,6 +30,16 @@ def assert_config_error(ut, config_name):
         config = yaml.load(f, Loader=yaml.FullLoader)
     with ut.assertRaises(KeyError):
         build_iam_policy(config)
+
+
+class TestVersionDefinition(unittest.TestCase):
+    """Test command line --version matches release version"""
+
+    def test_version_consistent(self):
+        with open("pyproject.toml") as f:
+            pyproject_version = toml.load(f)["version"]
+            
+        self.assertEqual(pyproject_version, VERSION)
 
 
 class TestExampleConfigs(unittest.TestCase):

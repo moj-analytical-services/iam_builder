@@ -3,9 +3,11 @@ import yaml
 import json
 
 from iam_builder.iam_builder import build_iam_policy
+VERSION = "3.5.0"
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-V", "--version", action='version', version=f'iam_builder {VERSION}', help="prints iam_builder release version")
     parser.add_argument("-c", "--config", help="path to your yaml/json config")
     parser.add_argument("-o", "--output", help="output_path")
     args = parser.parse_args()
