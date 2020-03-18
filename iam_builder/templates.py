@@ -47,7 +47,7 @@ iam_lookup = {
                 "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::aws-athena-query-results-593291632749-eu-west-1/*"
+                "arn:aws:s3:::aws-athena-query-results-*"
             ]
         },
         {
