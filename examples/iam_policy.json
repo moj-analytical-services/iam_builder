@@ -2,18 +2,39 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "CanListObjectsInAthenaBuckets",
+            "Sid": "AllowListAllMyBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "AllowListBucket",
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::moj-analytics-lookup-tables",
                 "arn:aws:s3:::alpha-athena-query-dump"
             ]
         },
         {
-            "Sid": "CanWriteToDefaultAthenaBucket",
+            "Sid": "AllowGetObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::moj-analytics-lookup-tables/*"
+            ]
+        },
+        {
+            "Sid": "AllowGetPutObject",
             "Effect": "Allow",
             "Action": [
                 "s3:GetObject",
@@ -24,18 +45,7 @@
             ]
         },
         {
-            "Sid": "CanReadAthenaExamples",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::athena-examples*"
-            ]
-        },
-        {
-            "Sid": "CanReadWriteAthenaDumpFolder",
+            "Sid": "AllowGetPutDeleteObject",
             "Effect": "Allow",
             "Action": [
                 "s3:GetObject",
@@ -47,7 +57,7 @@
             ]
         },
         {
-            "Sid": "ReadAthenaGlue",
+            "Sid": "AllowReadAthenaGlue",
             "Effect": "Allow",
             "Action": [
                 "athena:BatchGetNamedQuery",

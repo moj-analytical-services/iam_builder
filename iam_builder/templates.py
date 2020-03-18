@@ -8,18 +8,39 @@ athena_dump_bucket = "alpha-athena-query-dump"
 iam_lookup = {
     "athena_read_access": [
         {
-            "Sid": "CanListObjectsInAthenaBuckets",
+            "Sid": "AllowListAllMyBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "AllowListBucket",
             "Effect": "Allow",
             "Action": [
                 "s3:ListBucket"
             ],
             "Resource": [
-                "arn:aws:s3:::aws-athena-query-results-*",
+                "arn:aws:s3:::moj-analytics-lookup-tables",
                 "arn:aws:s3:::" + athena_dump_bucket
             ]
         },
         {
-            "Sid": "CanWriteToDefaultAthenaBucket",
+            "Sid": "AllowGetObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::moj-analytics-lookup-tables/*"
+            ]
+        },
+        {
+            "Sid": "AllowGetPutObject",
             "Effect": "Allow",
             "Action": [
                 "s3:GetObject",
@@ -30,18 +51,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "CanReadAthenaExamples",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::athena-examples*"
-            ]
-        },
-        {
-            "Sid": "CanReadWriteAthenaDumpFolder",
+            "Sid": "AllowGetPutDeleteObject",
             "Effect": "Allow",
             "Action": [
                 "s3:GetObject",
@@ -53,7 +63,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "ReadAthenaGlue",
+            "Sid": "AllowReadAthenaGlue",
             "Effect": "Allow",
             "Action": [
                 "athena:BatchGetNamedQuery",
@@ -94,7 +104,7 @@ iam_lookup = {
     ],
     "athena_write_access": [
         {
-            "Sid": "WriteAthenaGlue",
+            "Sid": "AllowWriteAthenaGlue",
             "Effect": "Allow",
             "Action": [
                 "athena:DeleteNamedQuery",
