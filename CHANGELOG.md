@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## v3.6.0
+
+- Updated Athena read and write policy templates to remove permissions to `ListBucket` on `aws-athena-query-results-*` and improve consistency
+
 ## v3.5.0
 
 - Added additional permissions to glue jobs to write logs and metrics correctly
