@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iam_builder"
-version = "3.6.0"
+version = "3.7.0"
 description = "A lil python package to generate iam policies"
 authors = ["Karik Isichei <karik.isichei@digital.justice.gov.uk>"]
 license = "MIT"
@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.5"
 PyYAML = "^5.1"
-parameterized = "^0.6"
+parameterized = "0.7.*"
 
 [tool.poetry.scripts]
 iam_builder = "iam_builder.command_line:main"
