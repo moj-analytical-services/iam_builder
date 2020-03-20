@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.5"
 PyYAML = "^5.1"
-parameterized = "^0.6"
+parameterized = "0.7.*"
 
 [tool.poetry.scripts]
 iam_builder = "iam_builder.command_line:main"
