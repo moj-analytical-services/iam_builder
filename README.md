@@ -108,4 +108,18 @@ Whilst the example json (`iam_config.json`) looks like this:
   - **write_only:** A list of s3 paths that the iam_role should be able to access (write only). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
   - **read_write_s3_access:** A list of s3 paths that the iam_role should be able to access (read and write). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
-  
+
+## How to update
+
+When updating IAM builder, make sure to change the version number in `pyproject.yaml` and describe the change in `CHANGELOG.md`.
+
+If you have changed any dependencies in `pyproject.yaml`, run `poetry update` to update `poetry.lock`.
+
+Once you have created a release in GitHub, to publish the latest version to PyPI, run:
+
+```
+poetry build
+poetry publish -u <username>
+```
+
+Here, you should substitute `<username>` for your PyPI username. In order to publish to PyPI, you must be an owner of the project.
