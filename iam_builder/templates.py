@@ -1,3 +1,6 @@
+# formatted to match JSON IAM policy - so purposefully
+# not matching standard Python line break conventions
+
 iam_base_template = {
     "Version": "2012-10-17",
     "Statement": []
@@ -205,6 +208,7 @@ iam_lookup = {
     ]
 }
 
+
 def get_pass_role_to_glue_policy(iam_role):
     policy = {
                 "Sid": "PassRoleToGlueService",
@@ -223,6 +227,7 @@ def get_pass_role_to_glue_policy(iam_role):
             }
     return policy
 
+
 def get_read_only_policy(list_of_s3_paths):
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
@@ -236,6 +241,7 @@ def get_read_only_policy(list_of_s3_paths):
             "Resource": list_of_s3_paths,
         }
     return policy
+
 
 def get_write_only_policy(list_of_s3_paths):
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
@@ -252,6 +258,7 @@ def get_write_only_policy(list_of_s3_paths):
             "Resource": list_of_s3_paths,
         }
     return policy
+
 
 def get_read_write_policy(list_of_s3_paths):
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
@@ -272,6 +279,7 @@ def get_read_write_policy(list_of_s3_paths):
     }
     return policy
 
+
 def get_s3_list_bucket_policy(list_of_buckets):
     list_of_buckets = add_s3_arn_prefix(list_of_buckets)
     policy = {
@@ -286,9 +294,11 @@ def get_s3_list_bucket_policy(list_of_buckets):
     }
     return policy
 
+
 def add_s3_arn_prefix(paths):
-    arn_prefix = 'arn:aws:s3:::'
+    arn_prefix = "arn:aws:s3:::"
     return [arn_prefix + p for p in paths]
+
 
 def get_secrets(iam_role):
     statement = {
