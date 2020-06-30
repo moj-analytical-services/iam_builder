@@ -5,7 +5,7 @@ athena:
 
 glue_job: true
 
-s3: 
+s3:
   read_only:
     - test_bucket_read_only/*
 
