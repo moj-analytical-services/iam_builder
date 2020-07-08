@@ -6,7 +6,7 @@ iam_base_template = {
     "Statement": []
 }
 
-athena_dump_bucket = "alpha-athena-query-dump"
+athena_dump_bucket = "mojap-athena-query-dump"
 
 iam_lookup = {
     "athena_read_access": [
