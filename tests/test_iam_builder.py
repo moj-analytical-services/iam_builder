@@ -57,7 +57,8 @@ class TestConfigOutputs(unittest.TestCase):
     """
     Test different configs
     """
-
+    maxDiff = None
+    
     @parameterized.expand(
         [
             "read_only",
@@ -70,6 +71,7 @@ class TestConfigOutputs(unittest.TestCase):
             "all_config",
         ]
     )
+
     def test_config_output(self, config_name):
         assert_config_as_expected(self, config_name)
 
