@@ -20,7 +20,7 @@
             ],
             "Resource": [
                 "arn:aws:s3:::moj-analytics-lookup-tables",
-                "arn:aws:s3:::alpha-athena-query-dump"
+                "arn:aws:s3:::mojap-athena-query-dump"
             ]
         },
         {
@@ -53,7 +53,7 @@
                 "s3:DeleteObject"
             ],
             "Resource": [
-                "arn:aws:s3:::alpha-athena-query-dump/${aws:userid}/*"
+                "arn:aws:s3:::mojap-athena-query-dump/${aws:userid}/*"
             ]
         },
         {
@@ -249,7 +249,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::alpha-athena-query-dump",
+                "arn:aws:s3:::mojap-athena-query-dump",
                 "arn:aws:s3:::test_bucket_read_only",
                 "arn:aws:s3:::test_bucket_read_write",
                 "arn:aws:s3:::test_bucket_write_only"
