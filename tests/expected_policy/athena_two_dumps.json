@@ -1,0 +1,152 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowListAllMyBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "AllowListBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::moj-analytics-lookup-tables",
+                "arn:aws:s3:::alpha-athena-query-dump",
+                "arn:aws:s3:::mojap-athena-query-dump"
+            ]
+        },
+        {
+            "Sid": "AllowGetObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::moj-analytics-lookup-tables/*"
+            ]
+        },
+        {
+            "Sid": "AllowGetPutObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-athena-query-results-*"
+            ]
+        },
+        {
+            "Sid": "AllowGetPutDeleteObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::alpha-athena-query-dump/${aws:userid}/*",
+                "arn:aws:s3:::mojap-athena-query-dump/${aws:userid}/*"
+            ]
+        },
+        {
+            "Sid": "AllowReadAthenaGlue",
+            "Effect": "Allow",
+            "Action": [
+                "athena:BatchGetNamedQuery",
+                "athena:BatchGetQueryExecution",
+                "athena:GetNamedQuery",
+                "athena:GetQueryExecution",
+                "athena:GetQueryResults",
+                "athena:GetQueryResultsStream",
+                "athena:GetWorkGroup",
+                "athena:ListNamedQueries",
+                "athena:ListWorkGroups",
+                "athena:StartQueryExecution",
+                "athena:StopQueryExecution",
+                "athena:CancelQueryExecution",
+                "athena:GetCatalogs",
+                "athena:GetExecutionEngine",
+                "athena:GetExecutionEngines",
+                "athena:GetNamespace",
+                "athena:GetNamespaces",
+                "athena:GetTable",
+                "athena:GetTables",
+                "athena:RunQuery",
+                "glue:GetDatabase",
+                "glue:GetDatabases",
+                "glue:GetTable",
+                "glue:GetTables",
+                "glue:GetPartition",
+                "glue:GetPartitions",
+                "glue:BatchGetPartition",
+                "glue:GetCatalogImportStatus",
+                "glue:GetUserDefinedFunction",
+                "glue:GetUserDefinedFunctions"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "AllowWriteAthenaGlue",
+            "Effect": "Allow",
+            "Action": [
+                "athena:DeleteNamedQuery",
+                "glue:BatchCreatePartition",
+                "glue:BatchDeletePartition",
+                "glue:BatchDeleteTable",
+                "glue:CreateDatabase",
+                "glue:CreatePartition",
+                "glue:CreateTable",
+                "glue:DeleteDatabase",
+                "glue:DeletePartition",
+                "glue:DeleteTable",
+                "glue:UpdateDatabase",
+                "glue:UpdatePartition",
+                "glue:UpdateTable",
+                "glue:CreateUserDefinedFunction",
+                "glue:DeleteUserDefinedFunction",
+                "glue:UpdateUserDefinedFunction"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "readonly",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::alpha-test-iam-builer/db/*"
+            ]
+        },
+        {
+            "Sid": "list",
+            "Action": [
+                "s3:ListBucket",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::alpha-athena-query-dump",
+                "arn:aws:s3:::alpha-test-iam-builer",
+                "arn:aws:s3:::mojap-athena-query-dump"
+            ]
+        }
+    ]
+}

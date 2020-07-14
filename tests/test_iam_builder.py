@@ -66,6 +66,7 @@ class TestConfigOutputs(unittest.TestCase):
             "sub_folder_multi_access",
             "athena_read_only",
             "athena_full_access",
+            "athena_two_dumps",
             "glue_job",
             "all_config",
         ]

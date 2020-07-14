@@ -9,7 +9,6 @@ from iam_builder.templates import (
     get_read_write_policy,
     get_s3_list_bucket_policy,
     get_secrets,
-    athena_dump_bucket,
 )
 
 
@@ -20,19 +19,34 @@ def build_iam_policy(config):
     iam = copy.deepcopy(iam_base_template)
 
     list_buckets = []
+
+    # Create lookup dict based on selected or default Athena dump bucket or buckets
+    try:
+        dump_bucket = config["athena"]["dump_bucket"]
+
+        if not isinstance(dump_bucket, list):
+            dump_bucket = [dump_bucket]
+
+        dump_bucket = [bucket.replace("_", "-") for bucket in dump_bucket]
+
+    except KeyError:
+        dump_bucket = ["mojap-athena-query-dump"]
+
+    lookup = iam_lookup(dump_bucket)
+
     # Define if has athena permission
     if "athena" in config:
-        iam["Statement"].extend(iam_lookup["athena_read_access"])
+        iam["Statement"].extend(lookup["athena_read_access"])
 
         if config["athena"]["write"]:
-            iam["Statement"].extend(iam_lookup["athena_write_access"])
+            iam["Statement"].extend(lookup["athena_write_access"])
 
         # Needed for s3tools package
-        list_buckets.append(athena_dump_bucket)
+        list_buckets.extend(dump_bucket)
 
     # Test to run glue jobs
     if "glue_job" in config and config["glue_job"]:
-        iam["Statement"].extend(iam_lookup["glue_job"])
+        iam["Statement"].extend(lookup["glue_job"])
         # Add ability to pass itself to glue job
         pass_role = get_pass_role_to_glue_policy(config["iam_role_name"])
         iam["Statement"].append(pass_role)
@@ -68,6 +82,6 @@ def build_iam_policy(config):
     if "secrets" in config and config["secrets"]:
         secrets_statement = get_secrets(config["iam_role_name"])
         iam["Statement"].append(secrets_statement)
-        iam["Statement"].extend(iam_lookup["decrypt_statement"])
+        iam["Statement"].extend(lookup["decrypt_statement"])
 
     return iam

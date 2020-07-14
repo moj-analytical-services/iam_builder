@@ -1,0 +1,9 @@
+athena:
+  write: true
+  dump_bucket: 
+    - alpha-athena-query-dump
+    - mojap-athena-query-dump
+
+s3:
+  read_only:
+    - alpha-test-iam-builer/db/*
