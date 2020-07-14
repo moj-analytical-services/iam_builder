@@ -5,11 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## v3.8.0
+## v4.0.0
 
 - Added details on how to update on PyPi
 - Added Github action for linting
-- Changed target bucket for temporary files from Athena queries: now mojap-athena-query-dump rather than alpha-athena-query-dump
+- Target bucket for Athena query temporary files can now be selected in config (or left out to use default)
+- Changed default query dump bucket from alpha-athena-query-dump to mojap-athena-query-dump
+- Can select multiple query dump buckets by putting a list in config
+- Added a test for multiple query dump buckets
 
 ## v3.7.0
 
