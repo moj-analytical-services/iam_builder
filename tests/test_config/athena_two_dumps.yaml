@@ -1,6 +1,6 @@
 athena:
   write: true
-  dump_bucket: 
+  dump_bucket:
     - alpha-athena-query-dump
     - mojap-athena-query-dump
 
