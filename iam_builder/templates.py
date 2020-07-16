@@ -1,4 +1,4 @@
-# formatted to match JSON IAM policy - so purposefully
+# Formatted to match JSON IAM policy - so purposefully
 # not matching standard Python line break conventions
 
 iam_base_template = {
@@ -7,25 +7,131 @@ iam_base_template = {
 }
 
 
-def iam_lookup(athena_dump_bucket):
-    """Creates a full lookup policy based on the selected dump bucket
+# Standard segments of iam policy that don't need parameters
+iam_lookup = {
+    "athena_write_access": [
+        {
+            "Sid": "AllowWriteAthenaGlue",
+            "Effect": "Allow",
+            "Action": [
+                "athena:DeleteNamedQuery",
+                "glue:BatchCreatePartition",
+                "glue:BatchDeletePartition",
+                "glue:BatchDeleteTable",
+                "glue:CreateDatabase",
+                "glue:CreatePartition",
+                "glue:CreateTable",
+                "glue:DeleteDatabase",
+                "glue:DeletePartition",
+                "glue:DeleteTable",
+                "glue:UpdateDatabase",
+                "glue:UpdatePartition",
+                "glue:UpdateTable",
+                "glue:CreateUserDefinedFunction",
+                "glue:DeleteUserDefinedFunction",
+                "glue:UpdateUserDefinedFunction"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ],
+    "glue_job": [
+        {
+            "Sid": "GlueJobActions",
+            "Effect": "Allow",
+            "Action": [
+                "glue:BatchStopJobRun",
+                "glue:CreateJob",
+                "glue:DeleteJob",
+                "glue:GetJob",
+                "glue:GetJobs",
+                "glue:GetJobRun",
+                "glue:GetJobRuns",
+                "glue:StartJobRun",
+                "glue:UpdateJob",
+                "glue:ListJobs",
+                "glue:BatchGetJobs",
+                "glue:GetJobBookmark"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CanGetLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:GetLogEvents",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:/aws-glue/*"
+            ]
+        },
+        {
+            "Sid": "CanGetCloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData",
+                "cloudwatch:GetMetricData",
+                "cloudwatch:ListDashboards"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "CanReadGlueStuff",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-glue-*/*",
+                "arn:aws:s3:::*/*aws-glue-*/*",
+                "arn:aws:s3:::aws-glue-*"
+            ]
+        }
+    ],
+    "decrypt_statement": [
+        {
+            "Sid": "allowDecrypt",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "arn:aws:kms:::key/*"
+            ]
+        }
+    ]
+}
+
+
+def get_athena_read_access(dump_bucket):
+    """Creates segments of IAM policy needed for reading
+    from one or more Athena query dump buckets
 
     Parameters
     ----------
-    athena_dump_bucket (str/list): bucket name or names for Athena query dump
+    dump_bucket (list): bucket name or names for Athena query dump
     """
-    # prepare sections of iam lookup that depend on dump bucket or buckets
+    # prepare segments that depend on dump bucket name
     allow_list_bucket_resources = ["arn:aws:s3:::moj-analytics-lookup-tables"]
     allow_list_bucket_resources.extend([
-        "arn:aws:s3:::" + bucket for bucket in athena_dump_bucket
+        "arn:aws:s3:::" + bucket for bucket in dump_bucket
         ])
     allow_get_put_delete_resources = [
-        "arn:aws:s3:::" + bucket + "/${aws:userid}/*" for bucket in athena_dump_bucket
+        "arn:aws:s3:::" + bucket + "/${aws:userid}/*" for bucket in dump_bucket
     ]
 
-    # insert prepared sections into full iam lookup
-    lookup = {
-        "athena_read_access": [
+    # insert prepared sections into full iam lookup for Athena reading
+    athena_read_access = [
             {
                 "Sid": "AllowListAllMyBuckets",
                 "Effect": "Allow",
@@ -115,110 +221,8 @@ def iam_lookup(athena_dump_bucket):
                     "*"
                 ]
             }
-        ],
-        "athena_write_access": [
-            {
-                "Sid": "AllowWriteAthenaGlue",
-                "Effect": "Allow",
-                "Action": [
-                    "athena:DeleteNamedQuery",
-                    "glue:BatchCreatePartition",
-                    "glue:BatchDeletePartition",
-                    "glue:BatchDeleteTable",
-                    "glue:CreateDatabase",
-                    "glue:CreatePartition",
-                    "glue:CreateTable",
-                    "glue:DeleteDatabase",
-                    "glue:DeletePartition",
-                    "glue:DeleteTable",
-                    "glue:UpdateDatabase",
-                    "glue:UpdatePartition",
-                    "glue:UpdateTable",
-                    "glue:CreateUserDefinedFunction",
-                    "glue:DeleteUserDefinedFunction",
-                    "glue:UpdateUserDefinedFunction"
-                ],
-                "Resource": [
-                    "*"
-                ]
-            }
-        ],
-        "glue_job": [
-            {
-                "Sid": "GlueJobActions",
-                "Effect": "Allow",
-                "Action": [
-                    "glue:BatchStopJobRun",
-                    "glue:CreateJob",
-                    "glue:DeleteJob",
-                    "glue:GetJob",
-                    "glue:GetJobs",
-                    "glue:GetJobRun",
-                    "glue:GetJobRuns",
-                    "glue:StartJobRun",
-                    "glue:UpdateJob",
-                    "glue:ListJobs",
-                    "glue:BatchGetJobs",
-                    "glue:GetJobBookmark"
-                ],
-                "Resource": [
-                    "*"
-                ]
-            },
-            {
-                "Sid": "CanGetLogs",
-                "Effect": "Allow",
-                "Action": [
-                    "logs:GetLogEvents",
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents",
-                    "logs:DescribeLogStreams"
-                ],
-                "Resource": [
-                    "arn:aws:logs:*:*:/aws-glue/*"
-                ]
-            },
-            {
-                "Sid": "CanGetCloudWatchLogs",
-                "Effect": "Allow",
-                "Action": [
-                    "cloudwatch:PutMetricData",
-                    "cloudwatch:GetMetricData",
-                    "cloudwatch:ListDashboards"
-                ],
-                "Resource": [
-                    "*"
-                ]
-            },
-            {
-                "Sid": "CanReadGlueStuff",
-                "Effect": "Allow",
-                "Action": [
-                    "s3:GetObject",
-                    "s3:PutObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::aws-glue-*/*",
-                    "arn:aws:s3:::*/*aws-glue-*/*",
-                    "arn:aws:s3:::aws-glue-*"
-                ]
-            }
-        ],
-        "decrypt_statement": [
-            {
-                "Sid": "allowDecrypt",
-                "Effect": "Allow",
-                "Action": [
-                    "kms:Decrypt"
-                ],
-                "Resource": [
-                    "arn:aws:kms:::key/*"
-                ]
-            }
         ]
-    }
-    return lookup
+    return athena_read_access
 
 
 def get_pass_role_to_glue_policy(iam_role):
