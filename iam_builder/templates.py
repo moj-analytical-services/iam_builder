@@ -113,7 +113,7 @@ iam_lookup = {
 }
 
 
-def get_athena_read_access(dump_bucket):
+def get_athena_read_access(dump_bucket: list) -> dict:
     """Creates segments of IAM policy needed for reading
     from one or more Athena query dump buckets
 
@@ -225,7 +225,7 @@ def get_athena_read_access(dump_bucket):
     return athena_read_access
 
 
-def get_pass_role_to_glue_policy(iam_role):
+def get_pass_role_to_glue_policy(iam_role: str) -> dict:
     policy = {
                 "Sid": "PassRoleToGlueService",
                 "Effect": "Allow",
@@ -244,7 +244,7 @@ def get_pass_role_to_glue_policy(iam_role):
     return policy
 
 
-def get_read_only_policy(list_of_s3_paths):
+def get_read_only_policy(list_of_s3_paths: list) -> dict:
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
             "Sid": "readonly",
@@ -259,7 +259,7 @@ def get_read_only_policy(list_of_s3_paths):
     return policy
 
 
-def get_write_only_policy(list_of_s3_paths):
+def get_write_only_policy(list_of_s3_paths: list) -> dict:
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
             "Sid": "writeonly",
@@ -276,7 +276,7 @@ def get_write_only_policy(list_of_s3_paths):
     return policy
 
 
-def get_read_write_policy(list_of_s3_paths):
+def get_read_write_policy(list_of_s3_paths: list) -> dict:
     list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
     policy = {
         "Sid": "readwrite",
@@ -296,7 +296,7 @@ def get_read_write_policy(list_of_s3_paths):
     return policy
 
 
-def get_s3_list_bucket_policy(list_of_buckets):
+def get_s3_list_bucket_policy(list_of_buckets: list) -> dict:
     list_of_buckets = add_s3_arn_prefix(list_of_buckets)
     policy = {
         "Sid": "list",
@@ -311,12 +311,12 @@ def get_s3_list_bucket_policy(list_of_buckets):
     return policy
 
 
-def add_s3_arn_prefix(paths):
+def add_s3_arn_prefix(paths: list) -> list:
     arn_prefix = "arn:aws:s3:::"
     return [arn_prefix + p for p in paths]
 
 
-def get_secrets(iam_role):
+def get_secrets(iam_role: str) -> dict:
     statement = {
         "Sid": "readParams",
         "Effect": "Allow",
