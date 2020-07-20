@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v4.0.0
+
+- Added details on how to update on PyPi
+- Added Github action for linting
+- Target bucket for Athena query temporary files can now be selected in config (or left out to use default)
+- Changed default query dump bucket from alpha-athena-query-dump to mojap-athena-query-dump
+- Can select multiple query dump buckets by putting a list in config
+- Added a test for multiple query dump buckets
+- Added some type hints
+
 ## v3.7.0
 
 - Updated `parameterized` module dependency to align with `etl_manager`

@@ -3,32 +3,38 @@ import copy
 from iam_builder.templates import (
     iam_base_template,
     iam_lookup,
+    get_athena_read_access,
     get_pass_role_to_glue_policy,
     get_read_only_policy,
     get_write_only_policy,
     get_read_write_policy,
     get_s3_list_bucket_policy,
     get_secrets,
-    athena_dump_bucket,
 )
 
 
-def build_iam_policy(config):
+def build_iam_policy(config: dict) -> dict:
     """
     Takes a configuration for an IAM policy and returns the policy as a dict.
     """
-    iam = copy.deepcopy(iam_base_template)
+    iam: dict = copy.deepcopy(iam_base_template)
 
     list_buckets = []
+
     # Define if has athena permission
     if "athena" in config:
-        iam["Statement"].extend(iam_lookup["athena_read_access"])
+        dump_bucket = config["athena"].get("dump_bucket", ["mojap-athena-query-dump"])
+        if not isinstance(dump_bucket, list):
+            dump_bucket = [dump_bucket]
+        dump_bucket = [bucket.replace("_", "-") for bucket in dump_bucket]
+
+        iam["Statement"].extend(get_athena_read_access(dump_bucket))
 
         if config["athena"]["write"]:
             iam["Statement"].extend(iam_lookup["athena_write_access"])
 
         # Needed for s3tools package
-        list_buckets.append(athena_dump_bucket)
+        list_buckets.extend(dump_bucket)
 
     # Test to run glue jobs
     if "glue_job" in config and config["glue_job"]:

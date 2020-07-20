@@ -2,6 +2,8 @@ iam_role_name: iam_role_name
 
 athena:
   write: false
+  dump_bucket:
+    - mojap-athena-query-dump
 
 glue_job: true
 

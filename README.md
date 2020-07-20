@@ -2,7 +2,7 @@
 
 [![Actions Status](https://github.com/moj-analytical-services/iam_builder/workflows/IAM%20Builder/badge.svg)](https://github.com/moj-analytical-services/iam_builder/actions)
 
-A python script to generate an IAM policy based on an yaml or json configuration.
+A python script to generate an IAM policy based on a yaml or json configuration.
 
 To install:
 
@@ -111,7 +111,7 @@ Whilst the example json (`iam_config.json`) looks like this:
 
 ## How to update
 
-When updating IAM builder, make sure to change the version number in `pyproject.yaml` and describe the change in `CHANGELOG.md`.
+When updating IAM builder, make sure to change the version number in `pyproject.toml` and describe the change in `CHANGELOG.md`.
 
 If you have changed any dependencies in `pyproject.yaml`, run `poetry update` to update `poetry.lock`.
 
