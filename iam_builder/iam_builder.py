@@ -1,4 +1,5 @@
 import copy
+from typing import Union, List
 
 from iam_builder.templates import (
     iam_base_template,
@@ -13,6 +14,22 @@ from iam_builder.templates import (
 )
 
 
+def check_is_list(
+    config_path: List[str], list_to_check: Union[list, str]
+) -> None:
+    """
+    Checks that an expected list is a list and raises a TypeError otherwise.
+    """
+    if not isinstance(list_to_check, list):
+        m = "Expected a list but received a string. Try using\n"
+        indent = ""
+        for x in config_path:
+            m += indent + x + ":\n"
+            indent += "  "
+        m += f"{indent}- {list_to_check}\n"
+        raise TypeError(m)
+
+
 def build_iam_policy(config: dict) -> dict:
     """
     Takes a configuration for an IAM policy and returns the policy as a dict.
@@ -23,7 +40,9 @@ def build_iam_policy(config: dict) -> dict:
 
     # Define if has athena permission
     if "athena" in config:
-        dump_bucket = config["athena"].get("dump_bucket", ["mojap-athena-query-dump"])
+        dump_bucket = config["athena"].get(
+            "dump_bucket", ["mojap-athena-query-dump"]
+        )
         if not isinstance(dump_bucket, list):
             dump_bucket = [dump_bucket]
         dump_bucket = [bucket.replace("_", "-") for bucket in dump_bucket]
@@ -46,26 +65,35 @@ def build_iam_policy(config: dict) -> dict:
     # Deal with read only access
     if "s3" in config:
         if "read_only" in config["s3"]:
+            check_is_list(["s3", "read_only"], config["s3"]["read_only"])
             s3_read_only = get_read_only_policy(config["s3"]["read_only"])
             iam["Statement"].append(s3_read_only)
 
             # Get buckets to list
-            list_buckets.extend([p.split("/")[0] for p in config["s3"]["read_only"]])
+            list_buckets.extend(
+                [p.split("/")[0] for p in config["s3"]["read_only"]]
+            )
 
         if "write_only" in config["s3"]:
+            check_is_list(["s3", "write_only"], config["s3"]["write_only"])
             s3_write_only = get_write_only_policy(config["s3"]["write_only"])
             iam["Statement"].append(s3_write_only)
 
             # Get buckets to list
-            list_buckets.extend([p.split("/")[0] for p in config["s3"]["write_only"]])
+            list_buckets.extend(
+                [p.split("/")[0] for p in config["s3"]["write_only"]]
+            )
 
         # Deal with write only access
         if "read_write" in config["s3"]:
+            check_is_list(["s3", "read_write"], config["s3"]["read_write"])
             s3_read_write = get_read_write_policy(config["s3"]["read_write"])
             iam["Statement"].append(s3_read_write)
 
             # Get buckets to list
-            list_buckets.extend([p.split("/")[0] for p in config["s3"]["read_write"]])
+            list_buckets.extend(
+                [p.split("/")[0] for p in config["s3"]["read_write"]]
+            )
 
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)

@@ -25,10 +25,10 @@ def assert_config_as_expected(ut, config_name):
     ut.assertDictEqual(out, expected)
 
 
-def assert_config_error(ut, config_name):
+def assert_config_error(ut, config_name, error_type):
     with open(os.path.join(config_base_path, config_name + ".yaml")) as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
-    with ut.assertRaises(KeyError):
+    with ut.assertRaises(error_type):
         build_iam_policy(config)
 
 
@@ -80,6 +80,12 @@ class TestBadConfigs(unittest.TestCase):
     TEST Dodgy configs
     """
 
-    @parameterized.expand(["bad_athena_config", "bad_glue_config"])
-    def test_config_error(self, config_name):
-        assert_config_error(self, config_name)
+    @parameterized.expand(
+        [
+            ("bad_athena_config", KeyError),
+            ("bad_glue_config", KeyError),
+            ("bad_read_only_not_list", TypeError),
+        ]
+    )
+    def test_config_error(self, config_name, error_type):
+        assert_config_error(self, config_name, error_type)
