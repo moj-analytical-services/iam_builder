@@ -8,6 +8,7 @@ import yaml
 import json
 
 from parameterized import parameterized
+from jsonschema import ValidationError
 
 from iam_builder.iam_builder import build_iam_policy
 
@@ -84,7 +85,7 @@ class TestBadConfigs(unittest.TestCase):
         [
             ("bad_athena_config", KeyError),
             ("bad_glue_config", KeyError),
-            ("bad_read_only_not_list", TypeError),
+            ("bad_read_only_not_list", ValidationError),
         ]
     )
     def test_config_error(self, config_name, error_type):

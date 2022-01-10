@@ -1,0 +1,54 @@
+import jsonschema
+
+IAM_SCHEMA = {
+    "type": "object",
+    "title": "iam_builder schema",
+    "description": "Schema for config files used by iam_builder",
+    "properties": {
+        "iam_role_name": {
+            "description": "The role name of the airflow job",
+            "type": "string",
+        },
+        "athena": {
+            "description": "Athena configuration",
+            "properties": {
+                "write": {
+                    "description": "write is either true or false, true for allowing Athena write access",
+                    "type": "boolean",
+                }
+            },
+        },
+        "glue_job": {
+            "description": "glue_job must be set to true to allow role to run glue jobs",
+            "type": "boolean",
+        },
+        "secrets": {
+            "description": "secrets must be set to true to allow role to access secrets from AWS Parameter Store",
+            "type": "boolean",
+        },
+        "s3": {
+            "description": "S3 access configuration",
+            "properties": {
+                "read_only": {
+                    "description": "A list of s3 paths that the iam_role should be able to access (read only).",
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+                "write_only": {
+                    "description": "A list of s3 paths that the iam_role should be able to access (write only).",
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+                "read_write": {
+                    "description": "A list of s3 paths that the iam_role should be able to access (read and write).",
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+            },
+        },
+    },
+}
+
+
+def validate_iam(config):
+    jsonschema.validate(instance=config, schema=IAM_SCHEMA)
