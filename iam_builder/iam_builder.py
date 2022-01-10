@@ -1,5 +1,4 @@
 import copy
-from typing import Union, List
 
 from iam_builder.templates import (
     iam_base_template,
