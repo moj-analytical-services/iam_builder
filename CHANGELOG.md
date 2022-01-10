@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## v4.1.0
 
 - Added schema validation
+- Removed support for Python 3.6
 
 ## v4.0.0
 

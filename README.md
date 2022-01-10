@@ -95,7 +95,9 @@ Whilst the example json (`iam_config.json`) looks like this:
 ```
 - **iam_role_name:** The role name of your airflow job; required if you want to run glue jobs or access secrets.
 
-- **athena:** Only has one key value pair. `write` which is either true or false. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
+- **athena:** Can have two keys. 
+  - **write**: Either `true` or `false`. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
+  - **dump_bucket**: The location in S3 (either an S3 path or a list of S3 paths) for temporarily storing the results of queries. This defaults to `mojap-athena-query-dump` and should not normally need changing.
 
 - **glue_job:** Boolean; must be set to `true` to allow role to run glue jobs. If `false` or absent role will not be able to run glue jobs.
 
@@ -107,7 +109,7 @@ Whilst the example json (`iam_config.json`) looks like this:
 
   - **write_only:** A list of s3 paths that the iam_role should be able to access (write only). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
-  - **read_write_s3_access:** A list of s3 paths that the iam_role should be able to access (read and write). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
+  - **read_write:** A list of s3 paths that the iam_role should be able to access (read and write). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
 ## How to update
 

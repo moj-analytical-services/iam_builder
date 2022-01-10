@@ -15,7 +15,14 @@ IAM_SCHEMA = {
                 "write": {
                     "description": "write is either true or false, true for allowing Athena write access",
                     "type": "boolean",
-                }
+                },
+                "dump_bucket": {
+                    "description": "Temporary home for query results",
+                    "oneOf": [
+                        {"type": "string"},
+                        {"type": "array", "items": {"type": "string"}},
+                    ],
+                },
             },
         },
         "glue_job": {
