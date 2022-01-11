@@ -57,5 +57,5 @@ IAM_SCHEMA = {
 }
 
 
-def validate_iam(config):
+def validate_iam(config: dict):
     jsonschema.validate(instance=config, schema=IAM_SCHEMA)
