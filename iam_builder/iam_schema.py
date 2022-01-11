@@ -7,5 +7,5 @@ IAM_SCHEMA = json.load(
 )
 
 
-def validate_iam(config):
+def validate_iam(config: dict):
     jsonschema.validate(instance=config, schema=IAM_SCHEMA)
