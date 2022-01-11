@@ -83,9 +83,10 @@ class TestBadConfigs(unittest.TestCase):
 
     @parameterized.expand(
         [
-            ("bad_athena_config", KeyError),
-            ("bad_glue_config", KeyError),
+            ("bad_athena_config", ValidationError),
+            ("bad_glue_config", ValidationError),
             ("bad_read_only_not_list", ValidationError),
+            ("bad_s3_config", ValidationError),
         ]
     )
     def test_config_error(self, config_name, error_type):

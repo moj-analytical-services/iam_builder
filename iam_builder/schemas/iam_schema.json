@@ -2,6 +2,7 @@
     "type": "object",
     "title": "iam_builder schema",
     "description": "Schema for config files used by iam_builder",
+    "additionalProperties": false,
     "properties": {
         "iam_role_name": {
             "description": "The role name of the airflow job",
@@ -9,6 +10,7 @@
         },
         "athena": {
             "description": "Athena configuration",
+            "additionalProperties": false,
             "properties": {
                 "write": {
                     "description": "write is either true or false, true for allowing Athena write access",
@@ -40,6 +42,7 @@
         },
         "s3": {
             "description": "S3 access configuration",
+            "additionalProperties": false,
             "properties": {
                 "read_only": {
                     "description": "A list of s3 paths that the iam_role should be able to access (read only).",

@@ -1,0 +1,3 @@
+s3:
+  read:
+    - alpha-test-iam-builer/db/*
