@@ -1,0 +1,8 @@
+# yamllint disable-file
+# SHOULD FAIL: Invalid YAML
+s3:
+  read_only: 
+   - x1
+  read_write:
+   - x2
+   write_only: - x3

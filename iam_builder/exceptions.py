@@ -1,0 +1,2 @@
+class IAMValidationError(Exception):
+    pass

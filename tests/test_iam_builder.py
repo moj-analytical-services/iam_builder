@@ -8,7 +8,9 @@ import yaml
 import json
 
 from parameterized import parameterized
-from jsonschema import ValidationError
+from iam_builder.exceptions import IAMValidationError
+from yaml.parser import ParserError
+
 
 from iam_builder.iam_builder import build_iam_policy
 
@@ -28,9 +30,9 @@ def assert_config_as_expected(ut, config_name):
 
 def assert_config_error(ut, config_name, error_type):
     with open(os.path.join(config_base_path, config_name + ".yaml")) as f:
-        config = yaml.load(f, Loader=yaml.FullLoader)
-    with ut.assertRaises(error_type):
-        build_iam_policy(config)
+        with ut.assertRaises(error_type):
+            config = yaml.load(f, Loader=yaml.FullLoader)
+            build_iam_policy(config)
 
 
 class TestExampleConfigs(unittest.TestCase):
@@ -83,10 +85,11 @@ class TestBadConfigs(unittest.TestCase):
 
     @parameterized.expand(
         [
-            ("bad_athena_config", ValidationError),
-            ("bad_glue_config", ValidationError),
-            ("bad_read_only_not_list", ValidationError),
-            ("bad_s3_config", ValidationError),
+            ("bad_athena_config", IAMValidationError),
+            ("bad_glue_config", IAMValidationError),
+            ("bad_read_only_not_list", IAMValidationError),
+            ("bad_s3_config", IAMValidationError),
+            ("bad_yaml", ParserError),
         ]
     )
     def test_config_error(self, config_name, error_type):
