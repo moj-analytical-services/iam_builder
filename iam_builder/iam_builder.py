@@ -35,7 +35,7 @@ def build_iam_policy(config: dict) -> dict:
 
         iam["Statement"].extend(get_athena_read_access(dump_bucket))
 
-        if "write" in config["athena"]:
+        if "write" in config["athena"] and config["athena"]["write"]:
             iam["Statement"].extend(iam_lookup["athena_write_access"])
 
         # Needed for s3tools package
