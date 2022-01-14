@@ -1,0 +1,3 @@
+# SHOULD FAIL: Invalid IAM config (read_only should be a list)
+s3:
+  read_only: test_bucket_read_only/*
