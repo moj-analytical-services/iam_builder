@@ -23,6 +23,6 @@ jobs:
           token: ${{ secrets.PAT_TESTING }}
           path: .github/actions
       - name: Python linting
-        uses: .github/actions/lint-python
+        uses: .github/actions/test-composite-actions/lint-python
       - name: YAML linting
         uses: .github/actions/test-composite-actions/lint-yaml
