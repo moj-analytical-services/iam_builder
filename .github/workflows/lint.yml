@@ -17,5 +17,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Python linting
         uses: moj-analytical-services/test-composite-actions/lint-python@v0.0.1
+        with:
+          token: ${{ secrets.PAT_TESTING }}
       - name: YAML linting
         uses: moj-analytical-services/test-composite-actions/lint-yaml@v0.0.1
+        with:
+          token: ${{ secrets.PAT_TESTING }}
