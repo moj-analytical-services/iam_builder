@@ -15,17 +15,7 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 yamllint
-      - name: Lint Python files with flake8
-        run: >
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics &&
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88
-          --statistics
-      - name: Lint YAML files with yamllint
-        run: >
-          yamllint . -d "{extends: default, rules: {line-length:
-          {allow-non-breakable-words: true, allow-non-breakable-inline-mappings:
-          true}}}" --no-warnings
+      - name: Python linting
+        uses: moj-analytical-services/test-composite-actions/lint-python@v0.0.1
+      - name: YAML linting
+        uses: moj-analytical-services/test-composite-actions/lint-yaml@v0.0.1
