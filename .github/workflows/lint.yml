@@ -19,10 +19,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: moj-analytical-services/test-composite-actions
-          ref: v0.0.1
           token: ${{ secrets.PAT_TESTING }}
-          path: .github/actions
+          path: .github/test-composite-actions
       - name: Python linting
-        uses: .github/actions/test-composite-actions/lint-python
+        uses: .github/test-composite-actions/lint-python
       - name: YAML linting
-        uses: .github/actions/test-composite-actions/lint-yaml
+        uses: .github/test-composite-actions/lint-yaml
