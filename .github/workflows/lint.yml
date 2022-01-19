@@ -20,8 +20,8 @@ jobs:
         with:
           repository: moj-analytical-services/test-composite-actions
           token: ${{ secrets.PAT_TESTING }}
-          path: .github/test-composite-actions
+          path: test-composite-actions
       - name: Python linting
-        uses: .github/test-composite-actions/lint-python
+        uses: ./test-composite-actions/lint-python
       - name: YAML linting
-        uses: .github/test-composite-actions/lint-yaml
+        uses: ./test-composite-actions/lint-yaml
