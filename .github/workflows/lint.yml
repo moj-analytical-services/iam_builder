@@ -18,7 +18,8 @@ jobs:
       - name: Get actions repo
         uses: actions/checkout@v2
         with:
-          repository: moj-analytical-services/test-composite-actions@v0.0.1
+          repository: moj-analytical-services/test-composite-actions
+          ref: v0.0.1
           token: ${{ secrets.PAT_TESTING }}
           path: test-composite-actions
       - name: Python linting
