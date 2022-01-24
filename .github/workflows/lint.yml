@@ -23,6 +23,6 @@ jobs:
           token: ${{ secrets.PAT_TESTING }}
           path: test-composite-actions
       - name: Python linting
-        uses: moj-analytical-services/lint-python@v1
+        uses: moj-analytical-services/actions-lint-python@v1
       - name: YAML linting
         uses: ./test-composite-actions/lint-yaml
