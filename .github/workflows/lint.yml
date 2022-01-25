@@ -8,4 +8,4 @@ jobs:
       - name: Python linting
         uses: moj-analytical-services/actions-lint-python@docker_version
       - name: YAML linting
-        uses: moj-analytical-services/actions-lint-yaml@vdocker_version
+        uses: moj-analytical-services/actions-lint-yaml@docker_version
