@@ -14,7 +14,7 @@ from iam_builder.templates import (
 from iam_builder.iam_schema import validate_iam
 
 
-def build_iam_policy(config: dict) -> dict:
+def build_iam_policy(config: dict) -> dict:  # noqa: C901
     """
     Takes a configuration for an IAM policy and returns the policy as a dict.
     """
