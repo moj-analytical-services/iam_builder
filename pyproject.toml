@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-PyYAML = "^6.0"
+PyYAML = ">=5.1,<7.0.0"
 parameterized = "0.7.*"
 jsonschema = ">=3.0.0"
 
