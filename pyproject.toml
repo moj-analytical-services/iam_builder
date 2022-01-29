@@ -2,7 +2,7 @@
 name = "iam_builder"
 version = "4.1.2"
 description = "A lil python package to generate iam policies"
-authors = ["Karik Isichei <karik.isichei@digital.justice.gov.uk>"]
+authors = ["MoJ Data Engineering <dataengineering@digital.justice.gov.uk>"]
 license = "MIT"
 readme = "README.md"
 
