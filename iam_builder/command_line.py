@@ -2,6 +2,10 @@ import argparse
 import yaml
 import json
 
+import os
+# should fail the pylint?
+print(os.getcwd())
+
 from iam_builder.iam_builder import build_iam_policy
 
 
