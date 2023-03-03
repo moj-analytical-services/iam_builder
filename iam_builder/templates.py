@@ -316,19 +316,38 @@ def add_s3_arn_prefix(paths: list) -> list:
     return [arn_prefix + p for p in paths]
 
 
-def get_secrets(iam_role: str) -> dict:
-    statement = {
-        "Sid": "readParams",
-        "Effect": "Allow",
-        "Action": [
-            "ssm:DescribeParameters",
-            "ssm:GetParameter",
-            "ssm:GetParameters",
-            "ssm:GetParameterHistory",
-            "ssm:GetParametersByPath"
-        ],
-        "Resource": [
-            f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
-        ]
-    }
+def get_secrets(iam_role: str, write=False) -> dict:
+    if write:
+        statement = {
+            "Sid": "readwriteParams",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParameterHistory",
+                "ssm:GetParametersByPath",
+                "ssm:PutParameter",
+                "ssm:DeleteParameter",
+                "ssm:DeleteParameters"
+            ],
+            "Resource": [
+                f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
+            ]
+        }
+    else:
+        statement = {
+            "Sid": "readParams",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParameterHistory",
+                "ssm:GetParametersByPath"
+            ],
+            "Resource": [
+                f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
+            ]
+        }
     return statement
