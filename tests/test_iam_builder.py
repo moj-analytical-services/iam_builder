@@ -72,6 +72,8 @@ class TestConfigOutputs(unittest.TestCase):
             "athena_two_dumps",
             "glue_job",
             "all_config",
+            "secrets",
+            "secrets_readwrite"
         ]
     )
     def test_config_output(self, config_name):
