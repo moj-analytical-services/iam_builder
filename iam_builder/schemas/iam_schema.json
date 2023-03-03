@@ -64,6 +64,13 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "deny": {
+                    "description": "A list of s3 paths that the iam_role should not be able to access.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         }
