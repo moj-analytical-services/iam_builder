@@ -8,6 +8,7 @@ from iam_builder.templates import (
     get_read_only_policy,
     get_write_only_policy,
     get_read_write_policy,
+    get_deny_policy,
     get_s3_list_bucket_policy,
     get_secrets,
 )
@@ -58,7 +59,8 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             list_buckets.extend(
                 [p.split("/")[0] for p in config["s3"]["read_only"]]
             )
-
+        
+        # Deal with write only access
         if "write_only" in config["s3"]:
             s3_write_only = get_write_only_policy(config["s3"]["write_only"])
             iam["Statement"].append(s3_write_only)
@@ -68,7 +70,6 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
                 [p.split("/")[0] for p in config["s3"]["write_only"]]
             )
 
-        # Deal with write only access
         if "read_write" in config["s3"]:
             s3_read_write = get_read_write_policy(config["s3"]["read_write"])
             iam["Statement"].append(s3_read_write)
@@ -76,6 +77,15 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             # Get buckets to list
             list_buckets.extend(
                 [p.split("/")[0] for p in config["s3"]["read_write"]]
+            )
+        
+        if "deny" in config["s3"]:
+            s3_deny = get_deny_policy(config["s3"]["deny"])
+            iam["Statement"].append(s3_deny)
+
+            # Get buckets to list
+            list_buckets.extend(
+                [p.split("/")[0] for p in config["s3"]["deny"]]
             )
 
     if list_buckets:

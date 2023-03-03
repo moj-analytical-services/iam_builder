@@ -296,6 +296,26 @@ def get_read_write_policy(list_of_s3_paths: list) -> dict:
     return policy
 
 
+def get_deny_policy(list_of_s3_paths: list) -> dict:
+    list_of_s3_paths = add_s3_arn_prefix(list_of_s3_paths)
+    policy = {
+        "Sid": "deny",
+        "Action": [
+            "s3:GetObject",
+            "s3:GetObjectAcl",
+            "s3:GetObjectVersion",
+            "s3:DeleteObject",
+            "s3:DeleteObjectVersion",
+            "s3:PutObject",
+            "s3:PutObjectAcl",
+            "s3:RestoreObject",
+        ],
+        "Effect": "Deny",
+        "Resource": list_of_s3_paths,
+    }
+    return policy
+
+
 def get_s3_list_bucket_policy(list_of_buckets: list) -> dict:
     list_of_buckets = add_s3_arn_prefix(list_of_buckets)
     policy = {
