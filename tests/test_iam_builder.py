@@ -66,6 +66,7 @@ class TestConfigOutputs(unittest.TestCase):
             "read_only",
             "write_only",
             "read_write",
+            "deny",
             "sub_folder_multi_access",
             "athena_read_only",
             "athena_full_access",

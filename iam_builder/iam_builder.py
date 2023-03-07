@@ -8,6 +8,7 @@ from iam_builder.templates import (
     get_read_only_policy,
     get_write_only_policy,
     get_read_write_policy,
+    get_deny_policy,
     get_s3_list_bucket_policy,
     get_secrets,
 )
@@ -26,9 +27,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
 
     # Define if has athena permission
     if "athena" in config:
-        dump_bucket = config["athena"].get(
-            "dump_bucket", ["mojap-athena-query-dump"]
-        )
+        dump_bucket = config["athena"].get("dump_bucket", ["mojap-athena-query-dump"])
         if not isinstance(dump_bucket, list):
             dump_bucket = [dump_bucket]
         dump_bucket = [bucket.replace("_", "-") for bucket in dump_bucket]
@@ -55,28 +54,29 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             iam["Statement"].append(s3_read_only)
 
             # Get buckets to list
-            list_buckets.extend(
-                [p.split("/")[0] for p in config["s3"]["read_only"]]
-            )
+            list_buckets.extend([p.split("/")[0] for p in config["s3"]["read_only"]])
 
+        # Deal with write only access
         if "write_only" in config["s3"]:
             s3_write_only = get_write_only_policy(config["s3"]["write_only"])
             iam["Statement"].append(s3_write_only)
 
             # Get buckets to list
-            list_buckets.extend(
-                [p.split("/")[0] for p in config["s3"]["write_only"]]
-            )
+            list_buckets.extend([p.split("/")[0] for p in config["s3"]["write_only"]])
 
-        # Deal with write only access
         if "read_write" in config["s3"]:
             s3_read_write = get_read_write_policy(config["s3"]["read_write"])
             iam["Statement"].append(s3_read_write)
 
             # Get buckets to list
-            list_buckets.extend(
-                [p.split("/")[0] for p in config["s3"]["read_write"]]
-            )
+            list_buckets.extend([p.split("/")[0] for p in config["s3"]["read_write"]])
+
+        if "deny" in config["s3"]:
+            s3_deny = get_deny_policy(config["s3"]["deny"])
+            iam["Statement"].append(s3_deny)
+
+            # Get buckets to list
+            list_buckets.extend([p.split("/")[0] for p in config["s3"]["deny"]])
 
     if list_buckets:
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
