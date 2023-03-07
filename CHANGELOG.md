@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## v4.2.0
 
 - added readwrite option for secrets
+- add deny option to s3 access
 
 ## v4.1.2
 
