@@ -38,7 +38,7 @@
         },
         "secrets": {
             "description": "secrets must be set to true to allow role to access secrets from AWS Parameter Store",
-            "type": "boolean"
+            "type": ["boolean", "string"]
         },
         "s3": {
             "description": "S3 access configuration",
@@ -60,6 +60,13 @@
                 },
                 "read_write": {
                     "description": "A list of s3 paths that the iam_role should be able to access (read and write).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "deny": {
+                    "description": "A list of s3 paths that the iam_role should not be able to access.",
                     "type": "array",
                     "items": {
                         "type": "string"

@@ -82,8 +82,9 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         s3_list_bucket = get_s3_list_bucket_policy(list_buckets)
         iam["Statement"].append(s3_list_bucket)
 
-    if "secrets" in config and config["secrets"]:
-        secrets_statement = get_secrets(config["iam_role_name"])
+    if "secrets" in config:
+        readwrite = config["secrets"] == "readwrite"
+        secrets_statement = get_secrets(config["iam_role_name"], readwrite)
         iam["Statement"].append(secrets_statement)
         iam["Statement"].extend(iam_lookup["decrypt_statement"])
 
