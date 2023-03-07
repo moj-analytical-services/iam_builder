@@ -104,7 +104,7 @@ Whilst the example json (`iam_config.json`) looks like this:
 
 - **glue_job:** Boolean; must be set to `true` to allow role to run glue jobs. If `false` or absent role will not be able to run glue jobs.
 
-- **secrets:** Boolean; must be set to `true` to allow role to access secrets from AWS Parameter Store. If `false` or absent role will not be able to access secrets.
+- **secrets:** Boolean or string; must be set to `true` or `"read"` to allow role to access secrets from AWS Parameter Store, and `readwrite` to provide read/write access. If `false` or absent role will not be able to access secrets.
 
 - **s3:** Can have up to 4 keys: `read_only`, `write_only`, `read_write`, and `deny`. Each key describes the level of access you want your iam policy to have with each s3 path. More details below:
   
