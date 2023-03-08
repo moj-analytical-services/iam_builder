@@ -19,7 +19,7 @@
       "test_bucket_read_only/write_folder/*"
     ],
     "deny": [
-      "test_bucket_read_write/sensitive_table"
+      "test_bucket_read_write/sensitive_table/*"
     ]
   }
 }

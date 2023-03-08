@@ -68,7 +68,7 @@ s3:
     - test_bucket_read_only/write_folder/*
 
   deny:
-    - test_bucket_read_write/sensitive_table
+    - test_bucket_read_write/sensitive_table/*
 ```
 
 Whilst the example json (`iam_config.json`) looks like this:

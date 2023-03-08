@@ -229,7 +229,7 @@
             ],
             "Effect": "Deny",
             "Resource": [
-                "arn:aws:s3:::test_bucket_read_write/sensitive_table"
+                "arn:aws:s3:::test_bucket_read_write/sensitive_table/*"
             ]
         },
         {
