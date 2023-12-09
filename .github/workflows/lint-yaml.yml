@@ -7,4 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: YAML linting
-        uses: moj-analytical-services/actions-lint-yaml@main
+        uses: moj-analytical-services/actions-lint-yaml@docker_version
