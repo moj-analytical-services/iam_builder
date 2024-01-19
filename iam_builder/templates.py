@@ -194,6 +194,7 @@ def get_athena_read_access(dump_bucket: list) -> dict:
                     "athena:GetQueryResultsStream",
                     "athena:GetWorkGroup",
                     "athena:ListNamedQueries",
+                    "athena:ListQueryExecutions",
                     "athena:ListWorkGroups",
                     "athena:StartQueryExecution",
                     "athena:StopQueryExecution",
