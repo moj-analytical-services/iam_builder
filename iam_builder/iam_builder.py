@@ -90,4 +90,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             iam["Statement"].append(secrets_statement)
             iam["Statement"].extend(iam_lookup["decrypt_statement"])
 
+    if "cloudtrail_lookup_events" in config:
+        iam["Statement"].extend(iam_lookup["cloudtrail_lookup_events"])
+
     return iam

@@ -109,6 +109,16 @@ iam_lookup = {
                 "arn:aws:kms:::key/*"
             ]
         }
+    ],
+    "cloudtrail_lookup_events": [
+        {
+            "Sid": "allowLookup",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:LookupEvents"
+            ],
+            "Resource": "*"
+        }
     ]
 }
 

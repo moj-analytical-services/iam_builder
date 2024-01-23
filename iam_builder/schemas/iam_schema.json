@@ -40,6 +40,10 @@
             "description": "secrets must be set to true to allow role to access secrets from AWS Parameter Store",
             "type": ["boolean", "string"]
         },
+        "cloudtrail_lookup_events": {
+            "description": "cloudtrail_lookup_events must be set to true to allow cloudtrail lookup",
+            "type": "boolean"
+        },
         "s3": {
             "description": "S3 access configuration",
             "additionalProperties": false,
