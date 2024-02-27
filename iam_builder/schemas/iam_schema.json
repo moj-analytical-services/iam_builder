@@ -73,6 +73,10 @@
                     }
                 }
             }
+        },
+        "role_duration_seconds":{
+            "description": "Max duration role can be assumed for in seconds",
+            "type": "integer"
         }
     }
 }
