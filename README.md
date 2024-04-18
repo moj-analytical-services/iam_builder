@@ -69,6 +69,9 @@ s3:
 
   deny:
     - test_bucket_read_write/sensitive_table/*
+
+kms:
+  - test_kms_key_arn
 ```
 
 Whilst the example json (`iam_config.json`) looks like this:
@@ -93,7 +96,8 @@ Whilst the example json (`iam_config.json`) looks like this:
       "test_bucket_read_write/*",
       "test_bucket_read_only/write_folder/*"
     ]
-  }
+  },
+  "kms": ["test_kms_key_arn"]
 }
 ```
 - **iam_role_name:** The role name of your airflow job; required if you want to run glue jobs or access secrets.
@@ -115,6 +119,10 @@ Whilst the example json (`iam_config.json`) looks like this:
   - **read_write:** A list of s3 paths that the iam_role should be able to access (read and write). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
   - **deny:** A list of s3 paths that the iam_role should _not_ be able to access. This should be used to add exceptions to wildcarded access to folders, for example excluding sensitive tables in order to provide basic access to a database. Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
+
+- **kms:**: A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt 
+  operations.
+
 ## How to update
 
 When updating IAM builder, make sure to change the version number in `pyproject.toml` and describe the change in `CHANGELOG.md`.

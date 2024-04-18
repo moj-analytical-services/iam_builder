@@ -372,3 +372,18 @@ def get_secrets(iam_role: str, write=False) -> dict:
             ]
         }
     return statement
+
+def get_kms_permissions(kms_arns: list) -> dict:
+    policy = {
+        "Sid": "kmsPermissions",
+        "Action": [
+            "kms:ReEncrypt*",
+            "kms:GenerateDataKey*",
+            "kms:Encrypt",
+            "kms:DescribeKey",
+            "kms:Decrypt"
+        ],
+        "Effect": "Allow",
+        "Resource": kms_arns,
+    }
+    return policy

@@ -11,6 +11,7 @@ from iam_builder.templates import (
     get_deny_policy,
     get_s3_list_bucket_policy,
     get_secrets,
+    get_kms_permissions
 )
 from iam_builder.iam_schema import validate_iam
 
@@ -89,5 +90,10 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             secrets_statement = get_secrets(config["iam_role_name"], readwrite)
             iam["Statement"].append(secrets_statement)
             iam["Statement"].extend(iam_lookup["decrypt_statement"])
+
+    if "kms" in config:
+        kms_arns = config["kms"]
+        kms_permissions = get_kms_permissions(kms_arns)
+        iam["Statement"].append(kms_permissions)
 
     return iam
