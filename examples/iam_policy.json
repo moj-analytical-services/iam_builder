@@ -271,6 +271,21 @@
             "Resource": [
                 "arn:aws:kms:::key/*"
             ]
+        },
+        {
+            "Sid": "kmsPermissions",
+            "Action": [
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:Encrypt",
+                "kms:DescribeKey",
+                "kms:Decrypt"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:kms:test_region:test_account:key/test_key",
+                "arn:aws:kms:test_region_2:test_account:key/test_key_2"
+            ]
         }
     ]
 }

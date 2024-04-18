@@ -16,3 +16,7 @@ s3:
   read_write:
     - test_bucket_read_write/*
     - test_bucket_read_only/write_folder/*
+
+kms:
+  - arn:aws:kms:test_region:test_account:key/test_key
+  - arn:aws:kms:test_region_2:test_account:key/test_key_2

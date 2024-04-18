@@ -255,6 +255,21 @@
                 "arn:aws:s3:::test_bucket_read_write",
                 "arn:aws:s3:::test_bucket_write_only"
             ]
+        },
+        {
+            "Sid": "kmsPermissions",
+            "Action": [
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:Encrypt",
+                "kms:DescribeKey",
+                "kms:Decrypt"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:kms:test_region:test_account:key/test_key",
+                "arn:aws:kms:test_region_2:test_account:key/test_key_2"
+            ]
         }
     ]
 }

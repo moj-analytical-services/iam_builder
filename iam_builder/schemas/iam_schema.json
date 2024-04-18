@@ -74,6 +74,13 @@
                 }
             }
         },
+        "kms": {
+            "description": "A list of kms key arns that the iam_role should be able to acces.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "role_duration_seconds":{
             "description": "Max duration role can be assumed for in seconds",
             "type": "integer"

@@ -21,5 +21,9 @@
     "deny": [
       "test_bucket_read_write/sensitive_table/*"
     ]
-  }
+  },
+  "kms": [
+    "arn:aws:kms:test_region:test_account:key/test_key",
+    "arn:aws:kms:test_region_2:test_account:key/test_key_2"
+  ]
 }
