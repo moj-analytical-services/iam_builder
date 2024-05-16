@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## v4.3.1
+## v4.5.0
 
 - added Get/Put Object Tagging permissions for S3 readwrite access
+
+## v4.4.0
+
+- added GetTableMetadata to Athena read policy
 
 ## v4.3.0
 
