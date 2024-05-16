@@ -206,6 +206,7 @@ def get_athena_read_access(dump_bucket: list) -> dict:
                     "athena:GetNamespaces",
                     "athena:GetTable",
                     "athena:GetTables",
+                    "athena:GetTableMetadata",
                     "athena:RunQuery",
                     "glue:GetDatabase",
                     "glue:GetDatabases",
