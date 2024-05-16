@@ -82,6 +82,7 @@
                 "athena:GetNamespaces",
                 "athena:GetTable",
                 "athena:GetTables",
+                "athena:GetTableMetadata",
                 "athena:RunQuery",
                 "glue:GetDatabase",
                 "glue:GetDatabases",
