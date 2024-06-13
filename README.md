@@ -123,6 +123,8 @@ Whilst the example json (`iam_config.json`) looks like this:
 - **kms:**: A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt 
   operations.
 
+- **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
+
 ## How to update
 
 When updating IAM builder, make sure to change the version number in `pyproject.toml` and describe the change in `CHANGELOG.md`.

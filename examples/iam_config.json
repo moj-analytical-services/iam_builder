@@ -25,5 +25,6 @@
   "kms": [
     "arn:aws:kms:test_region:test_account:key/test_key",
     "arn:aws:kms:test_region_2:test_account:key/test_key_2"
-  ]
+  ],
+  "bedrock": true
 }
