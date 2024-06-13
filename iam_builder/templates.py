@@ -159,7 +159,7 @@ iam_lookup = {
                 "bedrock:ListFoundationModelAgreementOffers",
                 "bedrock:GetUseCaseForModelAccess"
             ],
-            "Resource": ["*"]
+            "Resource": ["*"],
             "Condition": {
                 "StringEquals": {
                     "aws:RequestedRegion": [
