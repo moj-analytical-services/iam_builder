@@ -166,7 +166,7 @@ iam_lookup = {
                         "eu-central-1",
                         "eu-west-3"
                     ]
-                }   
+                }
             }
         }
     ]
