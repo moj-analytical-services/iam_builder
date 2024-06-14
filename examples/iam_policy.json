@@ -306,7 +306,6 @@
                 "bedrock:GetCustomModel",
                 "bedrock:ListCustomModels",
                 "bedrock:DeleteCustomModel",
-                "bedrock:GetProvisionedModelThroughput",
                 "bedrock:ListProvisionedModelThroughputs",
                 "bedrock:ListTagsForResource",
                 "bedrock:UntagResource",
