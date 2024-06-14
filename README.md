@@ -1,12 +1,12 @@
 # IAM Builder
 
-[![Actions Status](https://github.com/moj-analytical-services/iam_builder/workflows/IAM%20Builder/badge.svg)](https://github.com/moj-analytical-services/iam_builder/actions)
+[![Publish](https://github.com/moj-analytical-services/iam_builder/actions/workflows/poetry-pypi-release.yml/badge.svg)](https://github.com/moj-analytical-services/iam_builder/actions/workflows/poetry-pypi-release.yml)
 
 A python script to generate an IAM policy based on a yaml or json configuration.
 
 To install:
 
-```
+```bash
 # Most stable
 pip install iam-builder
 
@@ -16,7 +16,7 @@ pip install git+git://github.com/moj-analytical-services/iam_builder.git#egg=iam
 
 To use the command line interface:
 
-```
+```bash
 iam_builder -c examples/iam_config.yaml -o examples/iam_policy.json
 ```
 
@@ -55,7 +55,7 @@ glue_job: true
 
 secrets: true
 
-s3: 
+s3:
   read_only:
     - test_bucket_read_only/*
 
@@ -72,6 +72,8 @@ s3:
 
 kms:
   - test_kms_key_arn
+
+bedrock: true
 ```
 
 Whilst the example json (`iam_config.json`) looks like this:
@@ -97,12 +99,14 @@ Whilst the example json (`iam_config.json`) looks like this:
       "test_bucket_read_only/write_folder/*"
     ]
   },
-  "kms": ["test_kms_key_arn"]
+  "kms": ["test_kms_key_arn"],
+  "bedrock": true
 }
 ```
+
 - **iam_role_name:** The role name of your airflow job; required if you want to run glue jobs or access secrets.
 
-- **athena:** Can have two keys. 
+- **athena:** Can have two keys.
   - **write**: Either `true` or `false`. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
   - **dump_bucket**: The location in S3 (either an S3 path or a list of S3 paths) for temporarily storing the results of queries. This defaults to `mojap-athena-query-dump` and should not normally need changing.
 
@@ -111,7 +115,7 @@ Whilst the example json (`iam_config.json`) looks like this:
 - **secrets:** Boolean or string; must be set to `true` or `"read"` to allow role to access secrets from AWS Parameter Store, and `readwrite` to provide read/write access. If `false` or absent role will not be able to access secrets.
 
 - **s3:** Can have up to 4 keys: `read_only`, `write_only`, `read_write`, and `deny`. Each key describes the level of access you want your iam policy to have with each s3 path. More details below:
-  
+
   - **read_only:** A list of s3 paths that the iam_role should be able to access (read only). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
   - **write_only:** A list of s3 paths that the iam_role should be able to access (write only). Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
@@ -120,8 +124,10 @@ Whilst the example json (`iam_config.json`) looks like this:
 
   - **deny:** A list of s3 paths that the iam_role should _not_ be able to access. This should be used to add exceptions to wildcarded access to folders, for example excluding sensitive tables in order to provide basic access to a database. Each item in the list should either be a path to a object or finish with `/*` to denote that it can access everything within that directory. _Note the S3 paths don't start with `s3://` in the config._
 
-- **kms:**: A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt 
+- **kms:** A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt
   operations.
+
+- **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
 
 ## How to update
 

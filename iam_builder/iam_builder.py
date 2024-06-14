@@ -96,4 +96,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         kms_permissions = get_kms_permissions(kms_arns)
         iam["Statement"].append(kms_permissions)
 
+    if "bedrock" in config and config["bedrock"]:
+        iam["Statement"].extend(iam_lookup["bedrock"])
+
     return iam

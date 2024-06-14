@@ -109,6 +109,62 @@ iam_lookup = {
                 "arn:aws:kms:::key/*"
             ]
         }
+    ],
+    "bedrock": [
+        {
+            "Sid": "BedrockActions",
+            "Effect": "Allow",
+            "Action": [
+                "bedrock:ListFoundationModels",
+                "bedrock:GetFoundationModel",
+                "bedrock:InvokeModel",
+                "bedrock:InvokeModelWithResponseStream",
+                "bedrock:CreateModelCustomizationJob",
+                "bedrock:GetModelCustomizationJob",
+                "bedrock:GetFoundationModelAvailability",
+                "bedrock:ListModelCustomizationJobs",
+                "bedrock:StopModelCustomizationJob",
+                "bedrock:GetCustomModel",
+                "bedrock:ListCustomModels",
+                "bedrock:DeleteCustomModel",
+                "bedrock:ListProvisionedModelThroughputs",
+                "bedrock:ListTagsForResource",
+                "bedrock:UntagResource",
+                "bedrock:TagResource",
+                "bedrock:CreateAgent",
+                "bedrock:UpdateAgent",
+                "bedrock:GetAgent",
+                "bedrock:ListAgents",
+                "bedrock:CreateActionGroup",
+                "bedrock:UpdateActionGroup",
+                "bedrock:GetActionGroup",
+                "bedrock:ListActionGroups",
+                "bedrock:CreateAgentDraftSnapshot",
+                "bedrock:GetAgentVersion",
+                "bedrock:ListAgentVersions",
+                "bedrock:CreateAgentAlias",
+                "bedrock:UpdateAgentAlias",
+                "bedrock:GetAgentAlias",
+                "bedrock:ListAgentAliases",
+                "bedrock:InvokeAgent",
+                "bedrock:PutFoundationModelEntitlement",
+                "bedrock:GetModelInvocationLoggingConfiguration",
+                "bedrock:PutModelInvocationLoggingConfiguration",
+                "bedrock:CreateFoundationModelAgreement",
+                "bedrock:DeleteFoundationModelAgreement",
+                "bedrock:ListFoundationModelAgreementOffers",
+                "bedrock:GetUseCaseForModelAccess"
+            ],
+            "Resource": ["*"],
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestedRegion": [
+                        "eu-central-1",
+                        "eu-west-3"
+                    ]
+                }
+            }
+        }
     ]
 }
 
