@@ -160,7 +160,8 @@ iam_lookup = {
                 "StringEquals": {
                     "aws:RequestedRegion": [
                         "eu-central-1",
-                        "eu-west-3"
+                        "eu-west-3",
+                        "eu-west-2"
                     ]
                 }
             }
