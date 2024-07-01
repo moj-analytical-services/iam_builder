@@ -88,6 +88,7 @@
                 "glue:GetDatabase",
                 "glue:GetDatabases",
                 "glue:GetTable",
+                "glue:GetTableVersions",
                 "glue:GetTables",
                 "glue:GetPartition",
                 "glue:GetPartitions",
