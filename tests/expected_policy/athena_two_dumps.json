@@ -81,7 +81,6 @@
                 "athena:GetNamespace",
                 "athena:GetNamespaces",
                 "athena:GetTable",
-                "glue:GetTableVersions",
                 "athena:GetTables",
                 "athena:GetTableMetadata",
                 "athena:RunQuery",
