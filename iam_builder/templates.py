@@ -269,6 +269,7 @@ def get_athena_read_access(dump_bucket: list) -> dict:
                     "glue:GetDatabases",
                     "glue:GetTable",
                     "glue:GetTables",
+                    "glue:GetTableVersions",
                     "glue:GetPartition",
                     "glue:GetPartitions",
                     "glue:BatchGetPartition",
