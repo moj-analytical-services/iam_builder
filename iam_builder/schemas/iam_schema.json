@@ -8,6 +8,10 @@
             "description": "The role name of the airflow job",
             "type": "string"
         },
+        "external_iam_role": {
+            "description": "The ARN of an external IAM role to assume",
+            "type": "string"
+        },
         "athena": {
             "description": "Athena configuration",
             "additionalProperties": false,
