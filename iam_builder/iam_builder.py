@@ -101,7 +101,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             iam["Statement"].append(secretsmanager_read_only)
         else:
             raise ValueError(
-                f"requested access level {config["secretsmanager"]} is not yet "
+                f"requested access level {config['secretsmanager']} is not yet "
                 "implemented for SecretsManager in iam_builder, try specifying ‘"
                 "read_only’ instead."
             )
