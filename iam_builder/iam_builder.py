@@ -12,7 +12,7 @@ from iam_builder.templates import (
     get_s3_list_bucket_policy,
     get_secrets,
     get_kms_permissions,
-    get_secretsmanager_read_only_policy
+    get_secretsmanager_read_only_policy,
 )
 from iam_builder.iam_schema import validate_iam
 
@@ -91,10 +91,12 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             secrets_statement = get_secrets(config["iam_role_name"], readwrite)
             iam["Statement"].append(secrets_statement)
             iam["Statement"].extend(iam_lookup["decrypt_statement"])
-    
+
     if "secretsmanager" in config:
-       secretsmanager_read_only = get_secretsmanager_read_only_policy(config["secretsmanager"]["read_only"])
-       iam["Statement"].append(secretsmanager_read_only)
+        secretsmanager_read_only = get_secretsmanager_read_only_policy(
+            config["secretsmanager"]["read_only"]
+        )
+        iam["Statement"].append(secretsmanager_read_only)
 
     if "kms" in config:
         kms_arns = config["kms"]
