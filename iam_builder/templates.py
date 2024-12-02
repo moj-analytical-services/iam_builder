@@ -451,13 +451,13 @@ def get_kms_permissions(kms_arns: list) -> dict:
 
 def get_secretsmanager_read_only_policy(secret_name: str) -> str:
     policy = {
-        "Sid": "list",
+        "Sid": "readSecrets",
         "Action": [
             "secretsmanager:GetSecretValue",
             "secretsmanager:DescribeSecret",
             "secretsmanager:ListSecrets",
         ],
         "Effect": "Allow",
-        "Resource": f"arn:aws:secretsmanager:::secret:{secret_name}",
+        "Resource": f"arn:aws:secretsmanager:*:*:secret:{secret_name}*",
     }
     return policy
