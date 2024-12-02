@@ -102,8 +102,8 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         else:
             raise ValueError(
                 f"requested access level {config['secretsmanager']} is not yet "
-                "implemented for SecretsManager in iam_builder, try specifying ‘"
-                "read_only’ instead."
+                "implemented for SecretsManager in iam_builder, try specifying "
+                "’read_only’ instead."
             )
 
     if "kms" in config:
