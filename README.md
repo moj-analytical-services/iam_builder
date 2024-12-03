@@ -55,6 +55,10 @@ glue_job: true
 
 secrets: true
 
+secretsmanager: 
+  read_only:
+    - test_secret
+
 s3:
   read_only:
     - test_bucket_read_only/*
@@ -126,6 +130,8 @@ Whilst the example json (`iam_config.json`) looks like this:
 
 - **kms:** A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt
   operations.
+
+- **secretsmanager:** A secret that the iam_role should be able to access. Can call the GetSecretValue, DescribeSecret and ListSecrets operations.
 
 - **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
 
