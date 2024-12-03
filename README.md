@@ -74,6 +74,8 @@ kms:
   - test_kms_key_arn
 
 bedrock: true
+
+cloudtrail_lookup_events: true
 ```
 
 Whilst the example json (`iam_config.json`) looks like this:
@@ -100,7 +102,8 @@ Whilst the example json (`iam_config.json`) looks like this:
     ]
   },
   "kms": ["test_kms_key_arn"],
-  "bedrock": true
+  "bedrock": true,
+  "cloudtrail_lookup_events": true
 }
 ```
 
@@ -128,6 +131,8 @@ Whilst the example json (`iam_config.json`) looks like this:
   operations.
 
 - **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
+
+- **cloudtrail_lookup_events** Boolean; must be set to `true` to allow role to read Amazon CloudTrail events. If `false` or absent role will not be able to read  Amazon Cloudtrail events.
 
 ## How to update
 
