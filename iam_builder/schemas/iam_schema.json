@@ -85,6 +85,13 @@
                 "type": "string"
             }
         },
+        "secretsmanager": {
+            "description": "A secret that the iam_role should be able to acces.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "bedrock": {
             "description": "bedrock must be set to true to allow role to interact with Amazon Bedrock.",
             "type": "boolean"
