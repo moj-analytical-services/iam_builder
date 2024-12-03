@@ -449,7 +449,12 @@ def get_kms_permissions(kms_arns: list) -> dict:
     }
     return policy
 
-def get_secretsmanager_read_only_policy(secret_name: str) -> str:
+def get_secretsmanager_read_only_policy(secret_name: list) -> dict:
+    # prepare segments that depend on dump bucket name
+    allow_list_of_secrets = []
+    allow_list_of_secrets.extend([
+        "arn:aws:secretsmanager:*:*:secret:" + secret + "*" for secret in secret_name
+        ])
     policy = {
         "Sid": "readSecrets",
         "Action": [
@@ -458,6 +463,6 @@ def get_secretsmanager_read_only_policy(secret_name: str) -> str:
             "secretsmanager:ListSecrets",
         ],
         "Effect": "Allow",
-        "Resource": f"arn:aws:secretsmanager:*:*:secret:{secret_name}*",
+        "Resource": allow_list_of_secrets
     }
     return policy

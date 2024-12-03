@@ -57,7 +57,7 @@ secrets: true
 
 secretsmanager: 
   read_only:
-    - test_secret_name
+    - test_secret
 
 s3:
   read_only:

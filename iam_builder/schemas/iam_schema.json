@@ -96,6 +96,7 @@
                         "type": "string"
                     }
                 }
+            }
         },
         "bedrock": {
             "description": "bedrock must be set to true to allow role to interact with Amazon Bedrock.",
