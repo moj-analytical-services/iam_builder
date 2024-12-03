@@ -75,7 +75,7 @@ class TestConfigOutputs(unittest.TestCase):
             "all_config",
             "secrets",
             "secrets_readwrite",
-            "secrestmanager_read_only"
+            "secretsmanager_read_only"
         ]
     )
     def test_config_output(self, config_name):
