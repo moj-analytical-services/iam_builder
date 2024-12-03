@@ -7,7 +7,7 @@
             "Action": [
                 "cloudtrail:LookupEvents"
             ],
-            "Resource": "*"
+            "Resource": ["*"]
         }
     ]
 }
