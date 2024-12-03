@@ -86,7 +86,7 @@
             }
         },
         "secretsmanager": {
-            "description": "A secret that the iam_role should be able to acces.",
+            "description": "A secret that the iam_role should be able to access.",
             "additionalProperties": false,
             "properties": {
                 "read_only": {
