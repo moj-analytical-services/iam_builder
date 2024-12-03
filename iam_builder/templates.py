@@ -166,6 +166,16 @@ iam_lookup = {
                 }
             }
         }
+    ],
+    "cloudtrail_lookup_events": [
+        {
+            "Sid": "allowLookup",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:LookupEvents"
+            ],
+            "Resource": ["*"]
+        }
     ]
 }
 

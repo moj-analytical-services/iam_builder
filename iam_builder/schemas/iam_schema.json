@@ -89,6 +89,10 @@
             "description": "bedrock must be set to true to allow role to interact with Amazon Bedrock.",
             "type": "boolean"
         },
+        "cloudtrail_lookup_events": {
+            "description": "cloudtrail_lookup_events must be set to true to allow cloudtrail lookup",
+            "type": "boolean"
+        },
         "role_duration_seconds":{
             "description": "Max duration role can be assumed for in seconds",
             "type": "integer"

@@ -99,4 +99,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
     if "bedrock" in config and config["bedrock"]:
         iam["Statement"].extend(iam_lookup["bedrock"])
 
+    if "cloudtrail_lookup_events" in config:
+        iam["Statement"].extend(iam_lookup["cloudtrail_lookup_events"])
+
     return iam

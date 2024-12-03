@@ -74,7 +74,8 @@ class TestConfigOutputs(unittest.TestCase):
             "glue_job",
             "all_config",
             "secrets",
-            "secrets_readwrite"
+            "secrets_readwrite",
+            "cloudtrail_lookup_events"
         ]
     )
     def test_config_output(self, config_name):
