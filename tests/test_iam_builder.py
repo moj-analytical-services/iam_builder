@@ -25,8 +25,6 @@ def assert_config_as_expected(ut, config_name):
         expected = json.load(f)
 
     out = build_iam_policy(config)
-    print(expected)
-    print(out)
     ut.assertDictEqual(out, expected)
 
 
