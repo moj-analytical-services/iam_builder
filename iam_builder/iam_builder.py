@@ -96,7 +96,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         # Deal with read only access
         if "read_only" in config["secretsmanager"]:
             secretsmanager_read_only = get_secretsmanager_read_only_policy(
-                config["secretsmanager"]["read_only"]
+                config["secretsmanager"]
             )
             iam["Statement"].append(secretsmanager_read_only)
         else:
