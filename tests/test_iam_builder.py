@@ -74,7 +74,8 @@ class TestConfigOutputs(unittest.TestCase):
             "glue_job",
             "all_config",
             "secrets",
-            "secrets_readwrite"
+            "secrets_readwrite",
+            "secrestmanager_read_only"
         ]
     )
     def test_config_output(self, config_name):
@@ -93,6 +94,8 @@ class TestBadConfigs(unittest.TestCase):
             ("bad_read_only_not_list", IAMValidationError),
             ("bad_s3_config", IAMValidationError),
             ("bad_yaml", ParserError),
+            ("bad_secrestmanager_read_write", IAMValidationError),
+            ("bad_secrestmanager_write_only", IAMValidationError)
         ]
     )
     def test_config_error(self, config_name, error_type):
