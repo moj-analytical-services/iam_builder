@@ -75,7 +75,8 @@ class TestConfigOutputs(unittest.TestCase):
             "all_config",
             "secrets",
             "secrets_readwrite",
-            "secretsmanager_read_only"
+            "secretsmanager_read_only",
+            "cloudwatch_athena_query_executions"
         ]
     )
     def test_config_output(self, config_name):
