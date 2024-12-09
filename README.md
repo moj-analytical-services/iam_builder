@@ -104,7 +104,8 @@ Whilst the example json (`iam_config.json`) looks like this:
     ]
   },
   "kms": ["test_kms_key_arn"],
-  "bedrock": true
+  "bedrock": true,
+  "cloudwatch_athena_query_executions": true
 }
 ```
 
@@ -134,6 +135,8 @@ Whilst the example json (`iam_config.json`) looks like this:
 - **secretsmanager:** A secret that the iam_role should be able to access. Can call the GetSecretValue, DescribeSecret and ListSecrets operations.
 
 - **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
+
+- **cloudwatch_athena_query_executions** Boolean; must be set to `true` to allow role to read `cloudtrail-athena-events` log group. If `false` or absent role will not be able to read these cloudwatch logs.
 
 ## How to update
 

@@ -166,6 +166,19 @@ iam_lookup = {
                 }
             }
         }
+    ],
+    "cloudwatch_athena_query_executions": [
+        {
+            "Sid": "CanGetCloudWatchAthenaLogs",
+            "Effect": "Allow",
+            "Action": [
+                "log:GetLogEvents",
+                "log:GetLogRecord"
+            ],
+            "Resource": [
+                "arn:aws:logs:eu-west-2:593291632749:log-group:cloudtrail-athena-events:*"
+            ]
+        }
     ]
 }
 

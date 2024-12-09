@@ -114,4 +114,9 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
     if "bedrock" in config and config["bedrock"]:
         iam["Statement"].extend(iam_lookup["bedrock"])
 
+    if "cloudwatch_athena_query_executions" in config:
+        iam["Statement"].extend(
+            iam_lookup["cloudwatch_athena_query_executions"]
+        )
+
     return iam
