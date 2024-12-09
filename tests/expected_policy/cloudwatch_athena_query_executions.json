@@ -1,0 +1,14 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CanGetCloudWatchAthenaLogs",
+            "Effect": "Allow",
+            "Action": [
+                "log:GetLogEvents",
+                "log:GetLogRecord"
+            ],
+            "Resource": ["arn:aws:logs:eu-west-2:593291632749:log-group:cloudtrail-athena-events:*"]
+        }
+    ]
+}
