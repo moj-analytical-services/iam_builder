@@ -172,8 +172,8 @@ iam_lookup = {
             "Sid": "CanGetCloudWatchAthenaLogs",
             "Effect": "Allow",
             "Action": [
-                "log:GetLogEvents",
-                "log:GetLogRecord"
+                "logs:GetLogEvents",
+                "logs:GetLogRecord"
             ],
             "Resource": [
                 "arn:aws:logs:eu-west-2:593291632749:log-group:cloudtrail-athena-events:*"
