@@ -1,11 +1,10 @@
 import jsonschema
 import json
-import importlib
 from iam_builder.exceptions import IAMValidationError
 
 try:
     import pkg_resources
-except ImportError:
+except NameError:
     import importlib
 
 
