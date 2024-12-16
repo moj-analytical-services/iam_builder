@@ -1,11 +1,24 @@
 import jsonschema
 import json
-import pkg_resources
+import importlib
 from iam_builder.exceptions import IAMValidationError
 
-IAM_SCHEMA = json.load(
-    pkg_resources.resource_stream(__name__, "schemas/iam_schema.json")
-)
+try:
+    import pkg_resources
+except ImportError:
+    import importlib
+
+
+try:
+    IAM_SCHEMA = json.load(
+        pkg_resources.resource_stream(__name__, "schemas/iam_schema.json")
+    )
+except ImportError:
+    ref = importlib_resources.files(__name__).joinpath("schemas/iam_schema.json")
+    with ref.open('rb') as fp:
+        IAM_SCHEMA = json.load(
+            fp.read()
+        )
 
 
 def validate_iam(config: dict):
