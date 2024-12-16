@@ -4,7 +4,8 @@ from iam_builder.exceptions import IAMValidationError
 
 try:
     import pkg_resources
-except ModuleNotFoundError:
+except Exception as e:
+    print("Error importing pkg_resources", e)
     import importlib
 
 
