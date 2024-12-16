@@ -4,7 +4,7 @@ from iam_builder.exceptions import IAMValidationError
 
 try:
     import pkg_resources
-except NameError:
+except ModuleNotFoundError:
     import importlib
 
 
