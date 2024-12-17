@@ -153,7 +153,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "cadetWriteAccess",
+            "Sid": "CadetWriteAccess",
             "Effect": "Allow",
             "Action": [
                 "s3:List*",
@@ -179,7 +179,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "cadetReadAccess",
+            "Sid": "CadetReadAccess",
             "Effect": "Allow",
             "Action": [
                 "s3:List*",
