@@ -55,7 +55,7 @@
           ]
       },
       {
-          "Sid": "CaDeTWriteAccess",
+          "Sid": "CadetWriteAccess",
           "Effect": "Allow",
           "Action": [
               "s3:List*",
@@ -81,7 +81,7 @@
           ]
       },
       {
-          "Sid": "CaDeTReadAccess",
+          "Sid": "CadetReadAccess",
           "Effect": "Allow",
           "Action": [
               "s3:List*",

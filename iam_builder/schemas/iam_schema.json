@@ -36,8 +36,8 @@
                 }
             }
         },
-        "is_CADET_deployer": {
-            "description": "is_CADET_deployer should be reserved only for the highly empowered CADET deployment task. Inappropriate for other roles.",
+        "is_cadet_deployer": {
+            "description": "is_cadet_deployer should be reserved only for the highly empowered cadet deployment task. Inappropriate for other roles.",
             "type": "boolean"
         },
         "glue_job": {

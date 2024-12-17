@@ -120,11 +120,11 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             iam_lookup["cloudwatch_athena_query_executions"]
         )
 
-    if "is_CADET_deployer" in config:
-        if "CADET" not in config["iam_role_name"]:
+    if "is_cadet_deployer" in config:
+        if "cadet" not in config["iam_role_name"].lower():
             raise PrivilegedRoleValidationError(
-                "\'is_CADET_deployer\' is only valid for CADET deployment roles"
+                "\'is_cadet_deployer\' is only valid for CaDeT deployment roles"
             )
-        iam["Statement"].extend(iam_lookup["CADET_deployer"])
+        iam["Statement"].extend(iam_lookup["cadet_deployer"])
 
     return iam

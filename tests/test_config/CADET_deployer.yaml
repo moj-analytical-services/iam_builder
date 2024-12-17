@@ -1,3 +1,3 @@
-iam_role_name: CADET_airflow_deployment
+iam_role_name: cadet_airflow_deployment
 
-is_CADET_deployer: true
+is_cadet_deployer: true

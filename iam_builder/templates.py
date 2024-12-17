@@ -98,7 +98,7 @@ iam_lookup = {
             ]
         }
     ],
-    "CADET_deployer": [
+    "cadet_deployer": [
         {
             "Sid": "GlueCatalogActions",
             "Effect": "Allow",
@@ -153,7 +153,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "CaDeTWriteAccess",
+            "Sid": "cadetWriteAccess",
             "Effect": "Allow",
             "Action": [
                 "s3:List*",
@@ -179,7 +179,7 @@ iam_lookup = {
             ]
         },
         {
-            "Sid": "CaDeTReadAccess",
+            "Sid": "cadetReadAccess",
             "Effect": "Allow",
             "Action": [
                 "s3:List*",

@@ -72,7 +72,7 @@ class TestConfigOutputs(unittest.TestCase):
             "athena_full_access",
             "athena_two_dumps",
             "glue_job",
-            "CADET_deployer",
+            "cadet_deployer",
             "all_config",
             "secrets",
             "secrets_readwrite",
@@ -92,7 +92,7 @@ class TestBadConfigs(unittest.TestCase):
     @parameterized.expand(
         [
             ("bad_athena_config", IAMValidationError),
-            ("bad_CADET_deployer", PrivilegedRoleValidationError),
+            ("bad_cadet_deployer", PrivilegedRoleValidationError),
             ("bad_glue_config", IAMValidationError),
             ("bad_read_only_not_list", IAMValidationError),
             ("bad_s3_config", IAMValidationError),
