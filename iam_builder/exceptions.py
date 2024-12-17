@@ -6,3 +6,4 @@ class IAMValidationError(ValidationError):
 
 class PrivilegedRoleValidationError(ValueError):
     pass
+
