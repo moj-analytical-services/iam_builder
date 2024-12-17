@@ -15,6 +15,7 @@ from iam_builder.templates import (
     get_secretsmanager_read_only_policy,
 )
 from iam_builder.iam_schema import validate_iam
+from iam_builder.exceptions import PrivilegedRoleValidationError
 
 
 def build_iam_policy(config: dict) -> dict:  # noqa: C901
@@ -118,5 +119,12 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         iam["Statement"].extend(
             iam_lookup["cloudwatch_athena_query_executions"]
         )
+
+    if "is_cadet_deployer" in config:
+        if "cadet" not in config["iam_role_name"].lower():
+            raise PrivilegedRoleValidationError(
+                "\'is_cadet_deployer\' is only valid for CaDeT deployment roles"
+            )
+        iam["Statement"].extend(iam_lookup["cadet_deployer"])
 
     return iam

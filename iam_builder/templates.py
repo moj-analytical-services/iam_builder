@@ -98,6 +98,100 @@ iam_lookup = {
             ]
         }
     ],
+    "cadet_deployer": [
+        {
+            "Sid": "GlueCatalogActions",
+            "Effect": "Allow",
+            "Action": [
+                "glue:Get*",
+                "glue:DeleteTable",
+                "glue:DeleteTableVersion",
+                "glue:DeleteSchema",
+                "glue:DeletePartition",
+                "glue:DeleteDatabase",
+                "glue:UpdateTable",
+                "glue:UpdateSchema",
+                "glue:UpdatePartition",
+                "glue:UpdateDatabase",
+                "glue:CreateTable",
+                "glue:CreateSchema",
+                "glue:CreatePartition",
+                "glue:CreatePartitionIndex",
+                "glue:BatchCreatePartition",
+                "glue:CreateDatabase"
+            ],
+            "Resource": [
+                "arn:aws:glue:*:*:schema/*",
+                "arn:aws:glue:*:*:database/*",
+                "arn:aws:glue:*:*:table/*/*",
+                "arn:aws:glue:*:*:catalog"
+            ]
+        },
+        {
+            "Sid": "AthenaActions",
+            "Effect": "Allow",
+            "Action": [
+                "athena:List*",
+                "athena:Get*",
+                "athena:StartQueryExecution",
+                "athena:StopQueryExecution"
+            ],
+            "Resource": [
+                "arn:aws:athena:*:*:datacatalog/*",
+                "arn:aws:athena:*:*:workgroup/*"
+            ]
+        },
+        {
+            "Sid": "AirflowCLIPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "airflow:CreateCliToken"
+            ],
+            "Resource": [
+                "arn:aws:airflow:*:*:environment/dev",
+                "arn:aws:airflow:*:*:environment/prod"
+            ]
+        },
+        {
+            "Sid": "CadetWriteAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:List*",
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:DeleteObject*",
+                "s3:PutObject*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mojap-derived-tables/*",
+                "arn:aws:s3:::mojap-derived-tables",
+                "arn:aws:s3:::dbt-query-dump/*",
+                "arn:aws:s3:::dbt-query-dump",
+                "arn:aws:s3:::mojap-manage-offences/ho-offence-codes/*",
+                "arn:aws:s3:::mojap-manage-offences",
+                "arn:aws:s3:::mojap-hub-exports/probation_referrals_dump/*",
+                "arn:aws:s3:::mojap-hub-exports",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard/dev/models/domain_name=opg/*",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard/prod/models/domain_name=opg/*",
+                "arn:aws:s3:::alpha-bold-data-shares",
+                "arn:aws:s3:::alpha-bold-data-shares/reducing-reoffending/*"
+            ]
+        },
+        {
+            "Sid": "CadetReadAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:List*",
+                "s3:GetObject*",
+                "s3:GetBucket*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:s3:::*/*"
+            ]
+        }
+    ],
     "decrypt_statement": [
         {
             "Sid": "allowDecrypt",

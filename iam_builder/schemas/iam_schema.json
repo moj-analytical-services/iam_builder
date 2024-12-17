@@ -36,6 +36,10 @@
                 }
             }
         },
+        "is_cadet_deployer": {
+            "description": "is_cadet_deployer should be reserved only for the highly empowered cadet deployment task. Inappropriate for other roles.",
+            "type": "boolean"
+        },
         "glue_job": {
             "description": "glue_job must be set to true to allow role to run glue jobs",
             "type": "boolean"
@@ -106,8 +110,8 @@
             "description": "cloudwatch_athena_query_executions must be set to true to allow",
             "type": "boolean"
         },
-        
-        
+
+
         "role_duration_seconds":{
             "description": "Max duration role can be assumed for in seconds",
             "type": "integer"
