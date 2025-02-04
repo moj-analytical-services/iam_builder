@@ -255,7 +255,8 @@ iam_lookup = {
                     "aws:RequestedRegion": [
                         "eu-central-1",
                         "eu-west-3",
-                        "eu-west-2"
+                        "eu-west-2",
+                        "eu-west-1"
                     ]
                 }
             }
