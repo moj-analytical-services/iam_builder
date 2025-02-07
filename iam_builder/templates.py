@@ -566,7 +566,7 @@ def get_kms_permissions(kms_arns: list) -> dict:
         "Resource": kms_arns,
     }
     return policy
- 
+
 def get_secretsmanager_read_only_policy(secrets: list) -> dict:
     # prepare segments that depend on dump bucket name
     allow_list_of_secrets = []
