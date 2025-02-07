@@ -570,6 +570,7 @@ def get_lake_formation_permissions(iam_role: str, write=False) -> dict:
         "Resource": [
             f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
     ]
+    }
  
 def get_secretsmanager_read_only_policy(secrets: list) -> dict:
     # prepare segments that depend on dump bucket name
