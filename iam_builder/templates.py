@@ -448,3 +448,19 @@ def get_kms_permissions(kms_arns: list) -> dict:
         "Resource": kms_arns,
     }
     return policy
+
+def get_lake_formation_permissions(iam_role: str, write=False) -> dict:
+    policy = {
+        "Sid": "LakeFormationPermissions",
+        "Action": [
+            "lakeformation:GetDataAccess",
+            "iam:ListAccountAliases",
+            "s3:ListAllMyBuckets", 
+            "s3:GetBucketLocation"
+        ],
+        "Effect": "Allow",
+        "Resource": [
+            f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
+    ]
+    }
+    return policy
