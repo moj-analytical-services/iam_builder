@@ -98,6 +98,100 @@ iam_lookup = {
             ]
         }
     ],
+    "cadet_deployer": [
+        {
+            "Sid": "GlueCatalogActions",
+            "Effect": "Allow",
+            "Action": [
+                "glue:Get*",
+                "glue:DeleteTable",
+                "glue:DeleteTableVersion",
+                "glue:DeleteSchema",
+                "glue:DeletePartition",
+                "glue:DeleteDatabase",
+                "glue:UpdateTable",
+                "glue:UpdateSchema",
+                "glue:UpdatePartition",
+                "glue:UpdateDatabase",
+                "glue:CreateTable",
+                "glue:CreateSchema",
+                "glue:CreatePartition",
+                "glue:CreatePartitionIndex",
+                "glue:BatchCreatePartition",
+                "glue:CreateDatabase"
+            ],
+            "Resource": [
+                "arn:aws:glue:*:*:schema/*",
+                "arn:aws:glue:*:*:database/*",
+                "arn:aws:glue:*:*:table/*/*",
+                "arn:aws:glue:*:*:catalog"
+            ]
+        },
+        {
+            "Sid": "AthenaActions",
+            "Effect": "Allow",
+            "Action": [
+                "athena:List*",
+                "athena:Get*",
+                "athena:StartQueryExecution",
+                "athena:StopQueryExecution"
+            ],
+            "Resource": [
+                "arn:aws:athena:*:*:datacatalog/*",
+                "arn:aws:athena:*:*:workgroup/*"
+            ]
+        },
+        {
+            "Sid": "AirflowCLIPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "airflow:CreateCliToken"
+            ],
+            "Resource": [
+                "arn:aws:airflow:*:*:environment/dev",
+                "arn:aws:airflow:*:*:environment/prod"
+            ]
+        },
+        {
+            "Sid": "CadetWriteAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:List*",
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:DeleteObject*",
+                "s3:PutObject*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mojap-derived-tables/*",
+                "arn:aws:s3:::mojap-derived-tables",
+                "arn:aws:s3:::dbt-query-dump/*",
+                "arn:aws:s3:::dbt-query-dump",
+                "arn:aws:s3:::mojap-manage-offences/ho-offence-codes/*",
+                "arn:aws:s3:::mojap-manage-offences",
+                "arn:aws:s3:::mojap-hub-exports/probation_referrals_dump/*",
+                "arn:aws:s3:::mojap-hub-exports",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard/dev/models/domain_name=opg/*",
+                "arn:aws:s3:::alpha-app-opg-lpa-dashboard/prod/models/domain_name=opg/*",
+                "arn:aws:s3:::alpha-bold-data-shares",
+                "arn:aws:s3:::alpha-bold-data-shares/reducing-reoffending/*"
+            ]
+        },
+        {
+            "Sid": "CadetReadAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:List*",
+                "s3:GetObject*",
+                "s3:GetBucket*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*",
+                "arn:aws:s3:::*/*"
+            ]
+        }
+    ],
     "decrypt_statement": [
         {
             "Sid": "allowDecrypt",
@@ -161,10 +255,24 @@ iam_lookup = {
                     "aws:RequestedRegion": [
                         "eu-central-1",
                         "eu-west-3",
-                        "eu-west-2"
+                        "eu-west-2",
+                        "eu-west-1"
                     ]
                 }
             }
+        }
+    ],
+    "cloudwatch_athena_query_executions": [
+        {
+            "Sid": "CanGetCloudWatchAthenaLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:GetLogEvents",
+                "logs:GetLogRecord"
+            ],
+            "Resource": [
+                "arn:aws:logs:eu-west-2:593291632749:log-group:cloudtrail-athena-events:*"
+            ]
         }
     ]
 }
@@ -462,5 +570,21 @@ def get_lake_formation_permissions(iam_role: str, write=False) -> dict:
         "Resource": [
             f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
     ]
+ 
+def get_secretsmanager_read_only_policy(secrets: list) -> dict:
+    # prepare segments that depend on dump bucket name
+    allow_list_of_secrets = []
+    allow_list_of_secrets.extend([
+        "arn:aws:secretsmanager:*:*:secret:" + secret + "*" for secret in secrets
+        ])
+    policy = {
+        "Sid": "readSecrets",
+        "Action": [
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:DescribeSecret",
+            "secretsmanager:ListSecrets",
+        ],
+        "Effect": "Allow",
+        "Resource": allow_list_of_secrets
     }
     return policy

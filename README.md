@@ -55,6 +55,10 @@ glue_job: true
 
 secrets: true
 
+secretsmanager:
+  read_only:
+    - test_secret
+
 s3:
   read_only:
     - test_bucket_read_only/*
@@ -100,7 +104,8 @@ Whilst the example json (`iam_config.json`) looks like this:
     ]
   },
   "kms": ["test_kms_key_arn"],
-  "bedrock": true
+  "bedrock": true,
+  "cloudwatch_athena_query_executions": true
 }
 ```
 
@@ -109,6 +114,8 @@ Whilst the example json (`iam_config.json`) looks like this:
 - **athena:** Can have two keys.
   - **write**: Either `true` or `false`. If `false` then only read access to Athena (cannot create, delete or alter tables, databases and partitions). If `true` then the role will also have the ability to do stuff like CTAS queries, `DROP TABLE`, `CREATE DATABASE`, etc.
   - **dump_bucket**: The location in S3 (either an S3 path or a list of S3 paths) for temporarily storing the results of queries. This defaults to `mojap-athena-query-dump` and should not normally need changing.
+
+- **is_cadet_deployer:** Boolean; Gives access to a highly empowered Glue role for Create-A-Derived-Table deployments. Will fail to apply if the `iam_role_name` doesn't include `cadet` in the string. Gives the user full control over all glue and athena structures in the named account.
 
 - **glue_job:** Boolean; must be set to `true` to allow role to run glue jobs. If `false` or absent role will not be able to run glue jobs.
 
@@ -127,7 +134,11 @@ Whilst the example json (`iam_config.json`) looks like this:
 - **kms:** A list of kms arns that the iam_role should be able to access. Can call the DescribeKey, GenerateDataKey, Decrypt, Encrypt and ReEncrypt
   operations.
 
+- **secretsmanager:** A secret that the iam_role should be able to access. Can call the GetSecretValue, DescribeSecret and ListSecrets operations.
+
 - **bedrock:** Boolean; must be set to `true` to allow role to interact with Amazon Bedrock. If `false` or absent role will not be able to interact with Amazon Bedrock.
+
+- **cloudwatch_athena_query_executions** Boolean; must be set to `true` to allow role to read `cloudtrail-athena-events` log group. If `false` or absent role will not be able to read these cloudwatch logs.
 
 ## How to update
 

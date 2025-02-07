@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v4.12.0
+
+- Add Glue Superuser Policy for Create-A-Derived-Table deployments.
+
+## v4.11.0
+
+- Dropped support for Python < 3.9
+- Updated package versions
+
+
+## v4.10.0
+
+- Add permission to read cloudwatch-athena-events log
+
 ## v4.9.0
 
 - Add `external_iam_role` to allow Airflow Pulumi tests to pass

@@ -8,7 +8,7 @@ import yaml
 import json
 
 from parameterized import parameterized
-from iam_builder.exceptions import IAMValidationError
+from iam_builder.exceptions import IAMValidationError, PrivilegedRoleValidationError
 from yaml.parser import ParserError
 
 
@@ -72,9 +72,12 @@ class TestConfigOutputs(unittest.TestCase):
             "athena_full_access",
             "athena_two_dumps",
             "glue_job",
+            "cadet_deployer",
             "all_config",
             "secrets",
-            "secrets_readwrite"
+            "secrets_readwrite",
+            "secretsmanager_read_only",
+            "cloudwatch_athena_query_executions"
         ]
     )
     def test_config_output(self, config_name):
@@ -89,10 +92,13 @@ class TestBadConfigs(unittest.TestCase):
     @parameterized.expand(
         [
             ("bad_athena_config", IAMValidationError),
+            ("bad_cadet_deployer", PrivilegedRoleValidationError),
             ("bad_glue_config", IAMValidationError),
             ("bad_read_only_not_list", IAMValidationError),
             ("bad_s3_config", IAMValidationError),
             ("bad_yaml", ParserError),
+            ("bad_secretsmanager_read_write", IAMValidationError),
+            ("bad_secretsmanager_write_only", IAMValidationError)
         ]
     )
     def test_config_error(self, config_name, error_type):

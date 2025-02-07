@@ -13,8 +13,10 @@ from iam_builder.templates import (
     get_secrets,
     get_kms_permissions,
     get_lake_formation_permissions,
+    get_secretsmanager_read_only_policy,
 )
 from iam_builder.iam_schema import validate_iam
+from iam_builder.exceptions import PrivilegedRoleValidationError
 
 
 def build_iam_policy(config: dict) -> dict:  # noqa: C901
@@ -98,6 +100,19 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         )
         iam["Statement"].append(lake_formation_statement)
         iam["Statement"].extend(iam_lookup["decrypt_statement"])
+    if "secretsmanager" in config:
+        # Deal with read only access
+        if "read_only" in config["secretsmanager"]:
+            secretsmanager_read_only = get_secretsmanager_read_only_policy(
+                config["secretsmanager"]["read_only"]
+            )
+            iam["Statement"].append(secretsmanager_read_only)
+        else:
+            raise ValueError(
+                f"requested access level {config['secretsmanager']} is not yet "
+                "implemented for SecretsManager in iam_builder, try specifying "
+                "’read_only’ instead."
+            )
 
     if "kms" in config:
         kms_arns = config["kms"]
@@ -106,5 +121,17 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
 
     if "bedrock" in config and config["bedrock"]:
         iam["Statement"].extend(iam_lookup["bedrock"])
+
+    if "cloudwatch_athena_query_executions" in config:
+        iam["Statement"].extend(
+            iam_lookup["cloudwatch_athena_query_executions"]
+        )
+
+    if "is_cadet_deployer" in config:
+        if "cadet" not in config["iam_role_name"].lower():
+            raise PrivilegedRoleValidationError(
+                "\'is_cadet_deployer\' is only valid for CaDeT deployment roles"
+            )
+        iam["Statement"].extend(iam_lookup["cadet_deployer"])
 
     return iam

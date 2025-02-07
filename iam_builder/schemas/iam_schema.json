@@ -36,6 +36,10 @@
                 }
             }
         },
+        "is_cadet_deployer": {
+            "description": "is_cadet_deployer should be reserved only for the highly empowered cadet deployment task. Inappropriate for other roles.",
+            "type": "boolean"
+        },
         "glue_job": {
             "description": "glue_job must be set to true to allow role to run glue jobs",
             "type": "boolean"
@@ -85,10 +89,29 @@
                 "type": "string"
             }
         },
+        "secretsmanager": {
+            "description": "A secret that the iam_role should be able to access.",
+            "additionalProperties": false,
+            "properties": {
+                "read_only": {
+                    "description": "A secret that the iam_role should be able to access (read only).",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "bedrock": {
             "description": "bedrock must be set to true to allow role to interact with Amazon Bedrock.",
             "type": "boolean"
         },
+        "cloudwatch_athena_query_executions": {
+            "description": "cloudwatch_athena_query_executions must be set to true to allow",
+            "type": "boolean"
+        },
+
+
         "role_duration_seconds":{
             "description": "Max duration role can be assumed for in seconds",
             "type": "integer"
