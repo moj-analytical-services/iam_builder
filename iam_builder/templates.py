@@ -179,6 +179,16 @@ iam_lookup = {
             ]
         },
         {
+            "Sid": "LakeFormationPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "lakeformation:GetDataAccess"
+            ],
+             "Resource": [
+                    "*"
+            ]
+        },
+        {
             "Sid": "CadetReadAccess",
             "Effect": "Allow",
             "Action": [
