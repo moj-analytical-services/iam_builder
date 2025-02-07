@@ -292,12 +292,6 @@
             ]
         },
         {
-            "sid" : "LakeFormationGetDataAccess",
-            "effect" : "Allow",
-            "actions" : "lakeformation:GetDataAccess",
-            "resources": ["*"]
-        },
-        {
             "Sid": "BedrockActions",
             "Effect": "Allow",
             "Action": [

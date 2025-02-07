@@ -12,7 +12,6 @@ from iam_builder.templates import (
     get_s3_list_bucket_policy,
     get_secrets,
     get_kms_permissions,
-    get_lake_formation_permissions,
     get_secretsmanager_read_only_policy,
 )
 from iam_builder.iam_schema import validate_iam
@@ -94,12 +93,6 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
             iam["Statement"].append(secrets_statement)
             iam["Statement"].extend(iam_lookup["decrypt_statement"])
 
-        # lakeformation access added to the IAM role
-        lake_formation_statement = get_lake_formation_permissions(
-            config["iam_role_name"]
-        )
-        iam["Statement"].append(lake_formation_statement)
-        iam["Statement"].extend(iam_lookup["decrypt_statement"])
     if "secretsmanager" in config:
         # Deal with read only access
         if "read_only" in config["secretsmanager"]:

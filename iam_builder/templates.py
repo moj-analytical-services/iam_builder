@@ -179,6 +179,16 @@ iam_lookup = {
             ]
         },
         {
+            "Sid": "LakeFormationPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "lakeformation:GetDataAccess"
+            ],
+             "Resource": [
+                    "*"
+            ]
+        },
+        {
             "Sid": "CadetReadAccess",
             "Effect": "Allow",
             "Action": [
@@ -561,14 +571,11 @@ def get_lake_formation_permissions(iam_role: str, write=False) -> dict:
     policy = {
         "Sid": "LakeFormationPermissions",
         "Action": [
-            "lakeformation:GetDataAccess",
-            "iam:ListAccountAliases",
-            "s3:ListAllMyBuckets", 
-            "s3:GetBucketLocation"
+            "lakeformation:GetDataAccess"
         ],
         "Effect": "Allow",
         "Resource": [
-            f"arn:aws:ssm:*:*:parameter/alpha/airflow/{iam_role}/*"
+            "*"
     ]
     }
  
