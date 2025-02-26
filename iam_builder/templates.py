@@ -139,7 +139,8 @@ iam_lookup = {
                 "athena:GetSession",
                 "athena:GetSessionStatus",
                 "athena:ListSession",
-                "athena:TerminateSession"
+                "athena:TerminateSession",
+                "athena:StartCalculationExecution"
             ],
             "Resource": [
                 "arn:aws:athena:*:*:datacatalog/*",
