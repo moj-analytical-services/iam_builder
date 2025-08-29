@@ -60,7 +60,7 @@ class TestConfigOutputs(unittest.TestCase):
     """
     Test different configs
     """
-    maxDiff = None
+
     @parameterized.expand(
         [
             "read_only",
