@@ -134,7 +134,6 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         allowed_db_names = config["allowed_database_names"]
         invalid_db_characters = r"[^a-zA-Z\_\*\s]"
         glue_catalog_permissions = get_glue_permissions(allowed_db_names)
-        print(glue_catalog_permissions)
         for db in allowed_db_names:
             if re.search(invalid_db_characters, db):
                 raise IAMValidationError(
