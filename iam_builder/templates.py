@@ -590,3 +590,42 @@ def get_secretsmanager_read_only_policy(secrets: list) -> dict:
         "Resource": allow_list_of_secrets
     }
     return policy
+
+def get_glue_permissions(database_names: list) -> dict:
+    allowed_db_names = [f"arn:aws:glue:*:*:database/{name}" for name in database_names]
+    allowed_db_names.append("arn:aws:glue:*:*:database/alpha_user*")
+    allowed_db_names.append("arn:aws:glue:*:*:catalog")
+    table_names = [f"arn:aws:glue:*:*:table/{name}/*" for name in database_names]
+    table_names.append("arn:aws:glue:*:*:table/alpha_user*/*")
+    policy = {
+        "Sid": "glueCatalogPermissions",
+        "Action": [
+            "glue:GetDatabase",
+            "glue:GetDatabases",
+            "glue:GetTable",
+            "glue:GetTables",
+            "glue:GetTableVersion",
+            "glue:GetTableVersions",
+            "glue:GetPartition",
+            "glue:GetPartitions",
+            "glue:BatchGetPartition",
+            "glue:BatchCreatePartition",
+            "glue:BatchDeletePartition",
+            "glue:BatchDeleteTable",
+            "glue:CreateDatabase",
+            "glue:CreatePartition",
+            "glue:CreateTable",
+            "glue:DeleteDatabase",
+            "glue:DeletePartition",
+            "glue:DeleteTable",
+            "glue:UpdateDatabase",
+            "glue:UpdatePartition",
+            "glue:UpdateTable",
+            "glue:CreateUserDefinedFunction",
+            "glue:DeleteUserDefinedFunction",
+            "glue:UpdateUserDefinedFunction"
+        ],
+        "Effect": "Allow",
+        "Resource": allowed_db_names + table_names
+    }
+    return policy

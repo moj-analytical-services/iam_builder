@@ -36,6 +36,13 @@
                 }
             }
         },
+        "allowed_database_names": {
+            "description": "A list of glue database names that the iam_role should be able to access.",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
         "is_cadet_deployer": {
             "description": "is_cadet_deployer should be reserved only for the highly empowered cadet deployment task. Inappropriate for other roles.",
             "type": "boolean"
