@@ -33,11 +33,11 @@
             "Resource": [
                 "arn:aws:glue:*:*:database/example_database_name",
                 "arn:aws:glue:*:*:database/example_wildcard_*",
-                "arn:aws:glue:*:*:database/alpha_user*",
+                "arn:aws:glue:*:*:database/mojap_de_temp_alpha_user*",
                 "arn:aws:glue:*:*:catalog",
                 "arn:aws:glue:*:*:table/example_database_name/*",
                 "arn:aws:glue:*:*:table/example_wildcard_*/*",
-                "arn:aws:glue:*:*:table/alpha_user*/*"
+                "arn:aws:glue:*:*:table/mojap_de_temp_alpha_user*/*"
             ]
         }
     ]
