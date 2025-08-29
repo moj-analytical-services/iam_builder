@@ -130,7 +130,6 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
         iam["Statement"].extend(iam_lookup["cadet_deployer"])
 
     if "allowed_database_names" in config:
-        print("testing glue catalog functionality. Hi!")
         allowed_db_names = config["allowed_database_names"]
         invalid_db_characters = r"[^a-zA-Z\_\*\s]"
         glue_catalog_permissions = get_glue_permissions(allowed_db_names)
