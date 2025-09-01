@@ -13,9 +13,11 @@ from iam_builder.templates import (
     get_secrets,
     get_kms_permissions,
     get_secretsmanager_read_only_policy,
+    get_glue_permissions,
 )
 from iam_builder.iam_schema import validate_iam
-from iam_builder.exceptions import PrivilegedRoleValidationError
+from iam_builder.exceptions import PrivilegedRoleValidationError, IAMValidationError
+import re
 
 
 def build_iam_policy(config: dict) -> dict:  # noqa: C901
@@ -126,5 +128,17 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
                 "\'is_cadet_deployer\' is only valid for CaDeT deployment roles"
             )
         iam["Statement"].extend(iam_lookup["cadet_deployer"])
+
+    if "allowed_database_names" in config:
+        allowed_db_names = config["allowed_database_names"]
+        invalid_db_characters = r"[^a-zA-Z\_\*\s]"
+        for db in allowed_db_names:
+            if re.search(invalid_db_characters, db):
+                raise IAMValidationError(
+                    f"Invalid characters in database name: {db}. "
+                    "Only letters, numbers, underscores and asterisks are allowed."
+                )
+        glue_catalog_permissions = get_glue_permissions(allowed_db_names)
+        iam["Statement"].append(glue_catalog_permissions)
 
     return iam

@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "glueCatalogPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "glue:GetDatabase",
+                "glue:GetDatabases",
+                "glue:GetTable",
+                "glue:GetTables",
+                "glue:GetTableVersion",
+                "glue:GetTableVersions",
+                "glue:GetPartition",
+                "glue:GetPartitions",
+                "glue:BatchGetPartition",
+                "glue:BatchCreatePartition",
+                "glue:BatchDeletePartition",
+                "glue:BatchDeleteTable",
+                "glue:CreateDatabase",
+                "glue:CreatePartition",
+                "glue:CreateTable",
+                "glue:DeleteDatabase",
+                "glue:DeletePartition",
+                "glue:DeleteTable",
+                "glue:UpdateDatabase",
+                "glue:UpdatePartition",
+                "glue:UpdateTable",
+                "glue:CreateUserDefinedFunction",
+                "glue:DeleteUserDefinedFunction",
+                "glue:UpdateUserDefinedFunction"
+            ],
+            "Resource": [
+                "arn:aws:glue:*:*:database/example_database_name",
+                "arn:aws:glue:*:*:database/example_wildcard_*",
+                "arn:aws:glue:*:*:database/mojap_de_temp_alpha_user*",
+                "arn:aws:glue:*:*:catalog",
+                "arn:aws:glue:*:*:table/example_database_name/*",
+                "arn:aws:glue:*:*:table/example_wildcard_*/*",
+                "arn:aws:glue:*:*:table/mojap_de_temp_alpha_user*/*"
+            ]
+        }
+    ]
+}

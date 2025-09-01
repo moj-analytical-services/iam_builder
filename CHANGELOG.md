@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v4.17.0
+
+- Add intial changes to prepare for removal of broad glue permissions in iam_builder 5.0 (coming soon)
+- Implement tests/validation for new functionality
+
 ## v4.12.0
 
 - Add Glue Superuser Policy for Create-A-Derived-Table deployments.

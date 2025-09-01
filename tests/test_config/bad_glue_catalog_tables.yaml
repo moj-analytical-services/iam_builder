@@ -1,0 +1,5 @@
+iam_role_name: an_iam_role_name
+
+allowed_database_names:
+  - example_invalid_database_name!
+  - example_wildcard_*
