@@ -132,13 +132,13 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
     if "allowed_database_names" in config:
         allowed_db_names = config["allowed_database_names"]
         invalid_db_characters = r"[^a-zA-Z\_\*\s]"
-        glue_catalog_permissions = get_glue_permissions(allowed_db_names)
         for db in allowed_db_names:
             if re.search(invalid_db_characters, db):
                 raise IAMValidationError(
                     f"Invalid characters in database name: {db}. "
                     "Only letters, numbers, underscores and asterisks are allowed."
                 )
+        glue_catalog_permissions = get_glue_permissions(allowed_db_names)
         iam["Statement"].append(glue_catalog_permissions)
 
     return iam
