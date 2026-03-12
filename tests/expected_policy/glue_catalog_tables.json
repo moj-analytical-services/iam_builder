@@ -2,7 +2,7 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "glueCatalogPermissions",
+            "Sid": "GlueCatalogPermissions",
             "Effect": "Allow",
             "Action": [
                 "glue:GetDatabase",
