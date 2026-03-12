@@ -11,25 +11,12 @@ iam_base_template = {
 iam_lookup = {
     "athena_write_access": [
         {
-            "Sid": "AllowWriteAthenaGlue",
+            "Sid": "AllowWriteAthena",
             "Effect": "Allow",
             "Action": [
                 "athena:DeleteNamedQuery",
-                "glue:BatchCreatePartition",
-                "glue:BatchDeletePartition",
-                "glue:BatchDeleteTable",
-                "glue:CreateDatabase",
-                "glue:CreatePartition",
-                "glue:CreateTable",
-                "glue:DeleteDatabase",
-                "glue:DeletePartition",
-                "glue:DeleteTable",
-                "glue:UpdateDatabase",
-                "glue:UpdatePartition",
-                "glue:UpdateTable",
-                "glue:CreateUserDefinedFunction",
-                "glue:DeleteUserDefinedFunction",
-                "glue:UpdateUserDefinedFunction"
+                "athena:StopQueryExecution",
+                "athena:TerminateSession"
             ],
             "Resource": [
                 "*"
