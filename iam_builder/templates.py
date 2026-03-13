@@ -45,6 +45,7 @@ iam_lookup = {
             "Resource": [
                 "arn:aws:glue:*:*:database/mojap_de_temp_alpha_user*",
                 "arn:aws:glue:*:*:table/mojap_de_temp_alpha_user*/*"
+                "arn:aws:glue:*:*:catalog"
             ]
         }
     ],
