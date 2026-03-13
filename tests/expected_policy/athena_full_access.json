@@ -111,6 +111,7 @@
             ]
         },
         {
+            "Sid": "AllowWriteTempDB",
             "Effect": "Allow",
             "Action": [
                 "glue:Get*",
