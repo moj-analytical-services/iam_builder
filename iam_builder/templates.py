@@ -23,6 +23,31 @@ iam_lookup = {
             ]
         }
     ],
+    "athena_temp_db_write_access": [
+        {
+            "Sid": "AllowWriteTempDB",
+            "Effect": "Allow",
+            "Action": [
+                "glue:Get*",
+                "glue:CreateTable",
+                "glue:DeleteTable",
+                "glue:UpdateTable",
+                "glue:CreatePartition",
+                "glue:DeletePartition",
+                "glue:UpdatePartition",
+                "glue:BatchCreatePartition",
+                "glue:BatchDeletePartition",
+                "glue:BatchDeleteTable",
+                "glue:CreateDatabase",
+                "glue:DeleteDatabase",
+                "glue:UpdateDatabase"
+            ],
+            "Resource": [
+                "arn:aws:glue:*:*:database/mojap_de_temp_alpha_user*",
+                "arn:aws:glue:*:*:table/mojap_de_temp_alpha_user*/*"
+            ]
+        }
+    ],
     "glue_job": [
         {
             "Sid": "GlueJobActions",

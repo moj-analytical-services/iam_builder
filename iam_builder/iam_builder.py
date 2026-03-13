@@ -41,6 +41,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
 
         if config["athena"].get("write", False):
             iam["Statement"].extend(iam_lookup["athena_write_access"])
+            iam["Statement"].extend(iam_lookup["athena_temp_db_write_access"])
 
         # Needed for s3tools package
         list_buckets.extend(dump_bucket)
