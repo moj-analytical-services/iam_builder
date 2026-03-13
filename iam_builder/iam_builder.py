@@ -132,7 +132,7 @@ def build_iam_policy(config: dict) -> dict:  # noqa: C901
 
     if "allowed_database_names" in config:
         allowed_db_names = config["allowed_database_names"]
-        invalid_db_characters = r"[^a-zA-Z\_\*\s]"
+        invalid_db_characters = r"[^a-zA-Z0-9\_\*\s]"
         for db in allowed_db_names:
             if re.search(invalid_db_characters, db):
                 raise IAMValidationError(
